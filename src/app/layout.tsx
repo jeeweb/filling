@@ -25,7 +25,7 @@ export default function RootLayout({
           </h1>
           <Nav />
         </header>
-        <section>{children}</section>
+        <section className={styles.container}>{children}</section>
       </body>
     </html>
   );
