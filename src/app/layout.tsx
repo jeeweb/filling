@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { Nav } from "./Nav";
 import Link from "next/link";
+import "./reset.css";
 import * as styles from "./common.css";
 
 export const metadata: Metadata = {
