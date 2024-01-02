@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { vars } from "./theme.css";
 
 export const inner = style({
   display: "flex",
@@ -12,28 +13,45 @@ export const noContentsBox = style({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  justifyContent: "center",
-  marginTop: "-60px",
-  marginBottom: "24px",
-  height: "500px",
-  width: "800px",
-  backgroundColor: "#ddd",
+  height: "100%",
+  width: "100%",
+  paddingTop: "36px",
+  backgroundColor: vars.bgColor.gray,
   textAlign: "center",
+});
+
+export const controlWrap = style({
+  padding: "8px",
   borderRadius: "24px",
-  opacity: "0.4",
+  backgroundColor: vars.bgColor.white,
+  selectors: {
+    [`${noContentsBox} &`]: {
+      transform: "translateY(10vh)",
+    },
+  },
 });
 
 export const btnWrite = style({
-  width: "800px",
-  height: "48px",
-  lineHeight: "48px",
+  display: "inline-block",
+  padding: "8px 12px",
   textAlign: "center",
-  backgroundColor: "#86B6F6",
-  color: "#fff",
-  borderRadius: "8px",
+  borderRadius: "16px",
+  backgroundColor: vars.bgColor.gray,
+  transition: "0.2s",
   selectors: {
     "&:hover": {
-      backgroundColor: "#619ded",
+      backgroundColor: vars.bgColor.black,
+      color: vars.color.selected,
+    },
+  },
+});
+
+export const infoText = style({
+  selectors: {
+    [`${controlWrap} &`]: {
+      padding: "16px",
+      marginBottom: "4px",
+      fontSize: "20px",
     },
   },
 });
