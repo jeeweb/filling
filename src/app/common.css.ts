@@ -1,6 +1,10 @@
 import { style } from "@vanilla-extract/css";
+import { vars } from "./theme.css";
 
-export const common = style({});
+export const common = style({
+  color: vars.color.primary,
+  fontFamily: vars.font.common,
+});
 
 export const header = style({
   position: "absolute",
@@ -29,4 +33,14 @@ export const container = style({
   justifyContent: "center",
   height: "100vh",
   paddingTop: "60px",
+});
+
+export const logo = style({
+  fontFamily: vars.font.logo,
+  fontWeight: "normal",
+  selectors: {
+    [`${header} &`]: {
+      fontSize: "40px",
+    },
+  },
 });
