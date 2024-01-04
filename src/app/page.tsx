@@ -15,31 +15,40 @@ export default function Home() {
         </div>
       </section>
       <section className={homeStyles.contentsBox}>
-        <ul className={homeStyles.cardList}>
-          <li className={homeStyles.cardItem}>
-            <div className={homeStyles.imgBox}>
-              <Image src="/sample1.jpeg" alt="" fill={true} objectFit="cover" />
-            </div>
-            <div className={homeStyles.summaryTextBox}>
-              <div className={homeStyles.tagList}>
-                <span
-                  className={`${homeStyles.tagItem} ${homeStyles.drinkTag}`}
-                >
-                  주종
-                </span>
-                <span className={homeStyles.tagItem}>선택1</span>
-                <span className={homeStyles.tagItem}>선택2</span>
-                <span className={homeStyles.tagItem}>브랜드명</span>
-                <span className={homeStyles.tagItem}>YYYY</span>
+        <div
+          className={`${homeStyles.scrollWrap} ${homeStyles.cardScrollWrap}`}
+        >
+          <ul className={homeStyles.cardList}>
+            <li className={homeStyles.cardItem}>
+              <div className={homeStyles.imgBox}>
+                <Image
+                  src="/sample1.jpeg"
+                  alt=""
+                  fill={true}
+                  objectFit="cover"
+                />
               </div>
-              <p>title title title title</p>
-              <div className={homeStyles.dayInfo}>
-                <span>YYYY.MM.DD</span>
-                <span className={homeStyles.dayWeather}>날씨</span>
+              <div className={homeStyles.summaryTextBox}>
+                <div className={homeStyles.tagList}>
+                  <span
+                    className={`${homeStyles.tagItem} ${homeStyles.drinkTag}`}
+                  >
+                    주종
+                  </span>
+                  <span className={homeStyles.tagItem}>선택1</span>
+                  <span className={homeStyles.tagItem}>선택2</span>
+                  <span className={homeStyles.tagItem}>브랜드명</span>
+                  <span className={homeStyles.tagItem}>YYYY</span>
+                </div>
+                <p>title title title title</p>
+                <div className={homeStyles.dayInfo}>
+                  <span>YYYY.MM.DD</span>
+                  <span className={homeStyles.dayWeather}>날씨</span>
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </section>
     </>
   );
