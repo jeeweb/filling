@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "./theme.css";
+import { relative } from "path";
 
 export const inner = style({
   display: "flex",
@@ -10,7 +11,8 @@ export const inner = style({
 });
 
 export const noContentsBox = style({
-  display: "flex",
+  display: "none",
+  // display: "flex",
   flexDirection: "column",
   alignItems: "center",
   height: "100%",
@@ -54,4 +56,71 @@ export const infoText = style({
       fontSize: "20px",
     },
   },
+});
+
+export const contentsBox = style({});
+
+export const cardList = style({
+  display: "flex",
+});
+
+export const cardItem = style({
+  display: "flex",
+  flexDirection: "column",
+  width: "400px",
+  height: "64vh",
+  padding: "16px",
+  borderRadius: "12px",
+  boxShadow: "-2px 0px 8px 0px rgba(0,0,0,0.15)",
+});
+
+export const imgBox = style({
+  position: "relative",
+  height: "80%",
+  overflow: "hidden",
+  selectors: {
+    [`${cardItem} &`]: {},
+  },
+});
+
+export const summaryTextBox = style({
+  position: "relative",
+  flex: "1",
+  paddingTop: "16px",
+  selectors: {
+    [`${cardItem} &`]: {},
+  },
+});
+
+export const tagList = style({
+  display: "flex",
+  alignItems: "center",
+  gap: "4px",
+  width: "100%",
+  marginBottom: "12px",
+  overflow: "hidden",
+});
+export const tagItem = style({
+  padding: "4px 12px",
+  fontSize: "12px",
+  backgroundColor: vars.bgColor.yellow,
+  borderRadius: "10px",
+});
+
+export const drinkTag = style({
+  backgroundColor: vars.bgColor.red,
+});
+
+export const dayInfo = style({
+  selectors: {
+    [`${cardItem} &`]: {
+      position: "absolute",
+      bottom: "0",
+      fontSize: "12px",
+    },
+  },
+});
+
+export const dayWeather = style({
+  marginLeft: "12px",
 });
