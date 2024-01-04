@@ -1,6 +1,5 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "./theme.css";
-import { relative } from "path";
 
 export const inner = style({
   display: "flex",
@@ -17,7 +16,6 @@ export const noContentsBox = style({
   alignItems: "center",
   height: "100%",
   width: "100%",
-  paddingTop: "36px",
   backgroundColor: vars.bgColor.gray,
   textAlign: "center",
 });
@@ -58,17 +56,35 @@ export const infoText = style({
   },
 });
 
-export const contentsBox = style({});
+export const contentsBox = style({
+  height: "100%",
+  width: "100vw",
+  overflow: "hidden",
+});
+
+export const cardScrollWrap = style({});
+
+export const scrollWrap = style({
+  overflow: "auto",
+  selectors: {
+    [`&.${cardScrollWrap}`]: {
+      padding: "8vh",
+    },
+  },
+});
 
 export const cardList = style({
   display: "flex",
+  gap: "8px",
 });
 
 export const cardItem = style({
+  flexShrink: "0",
   display: "flex",
   flexDirection: "column",
   width: "400px",
   height: "64vh",
+  minHeight: "464px",
   padding: "16px",
   borderRadius: "12px",
   boxShadow: "-2px 0px 8px 0px rgba(0,0,0,0.15)",

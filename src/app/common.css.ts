@@ -27,10 +27,6 @@ export const navList = style({
 });
 
 export const container = style({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
   height: "100vh",
   paddingTop: "60px",
 });
