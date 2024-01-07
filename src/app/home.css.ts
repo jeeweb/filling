@@ -71,10 +71,13 @@ export const contentsBox = style({
   overflow: "hidden",
 });
 
-export const dim = style({
+export const modalWrap = style({
   position: "absolute",
   top: "0",
   left: "0",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   width: "100vw",
   height: "100vh",
   backgroundColor: "rgba(0,0,0,0.5)",
@@ -82,10 +85,7 @@ export const dim = style({
 });
 
 export const detailBox = style({
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  position: "relative",
   display: "flex",
   width: "80vw",
   minWidth: "800px",
@@ -135,14 +135,18 @@ export const cardList = style({
 
 export const cardItem = style({
   flexShrink: 0,
-  display: "flex",
-  flexDirection: "column",
   width: "400px",
   height: "64vh",
   minHeight: "464px",
   padding: "16px",
   borderRadius: "12px",
   boxShadow: "2px 2px 10px -2px rgba(0,0,0,0.15)",
+});
+
+export const linkDetail = style({
+  display: "flex",
+  flexDirection: "column",
+  height: "100%",
 });
 
 export const imgBox = style({

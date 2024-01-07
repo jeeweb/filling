@@ -1,11 +1,16 @@
 "use client";
 import Image from "next/image";
-import * as homeStyles from "../../home.css";
+import { useRouter } from "next/navigation";
+import * as homeStyles from "@/app/home.css";
 
-export default function Detail() {
+export default function DetailModal() {
+  const router = useRouter();
+  const onClickClose = () => {
+    router.back();
+  };
+
   return (
-    <>
-      <div className={homeStyles.dim}></div>
+    <div className={homeStyles.modalWrap}>
       <article className={homeStyles.detailBox}>
         <div className={homeStyles.imgBox}>
           <Image src="/sample1.jpeg" alt="" fill={true} objectFit="cover" />
@@ -49,8 +54,8 @@ export default function Detail() {
             <span>음식</span>
           </div>
         </div>
-        <button className={homeStyles.btnClose}></button>
+        <button className={homeStyles.btnClose} onClick={onClickClose}></button>
       </article>
-    </>
+    </div>
   );
 }
