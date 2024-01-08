@@ -1,7 +1,10 @@
 "use client";
+
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import * as homeStyles from "@/app/home.css";
+import * as commonStyles from "@/app/common.css";
+import * as postStyles from "@/app/_component/post.css";
+import TagList from "./TagList";
 
 export default function DetailModal() {
   const router = useRouter();
@@ -9,52 +12,50 @@ export default function DetailModal() {
     router.back();
   };
 
+  const example = {
+    id: "1",
+    image: "/sample1.jpeg",
+    drink: "Corona",
+    date: "2024. 01. 02",
+    weather: "맑음",
+    location: "비틀비틀",
+    people: "홍길동",
+    food: "타코",
+    title: "제목 예시",
+    contents: "컨텐츠 예시입니다",
+  };
+
   return (
-    <div className={homeStyles.modalWrap}>
-      <article className={homeStyles.detailBox}>
-        <div className={homeStyles.imgBox}>
-          <Image src="/sample1.jpeg" alt="" fill={true} objectFit="cover" />
+    <div className={commonStyles.modalWrap}>
+      <article className={postStyles.detailBox}>
+        <div className={postStyles.imgBox}>
+          <Image src={example.image} alt="" fill={true} objectFit="cover" />
         </div>
-        <div className={homeStyles.summaryTextBox}>
-          <div className={homeStyles.dayInfo}>
-            <span>YYYY.MM.DD</span>
-            <span className={homeStyles.dayWeather}>날씨</span>
+        <div className={postStyles.summaryTextBox}>
+          <div className={postStyles.dayInfo}>
+            <span>{example.date}</span>
+            <span className={postStyles.dayWeather}>{example.weather}</span>
           </div>
-          <div className={homeStyles.tagList}>
-            <span className={`${homeStyles.drinkTag} ${homeStyles.tagItem}`}>
-              주종
-            </span>
-            <span className={homeStyles.tagItem}>선택1</span>
-            <span className={homeStyles.tagItem}>선택2</span>
+          <TagList />
+          <div className={postStyles.drinkInfo}>
+            <span>{example.drink}</span>
           </div>
-          <div className={homeStyles.drinkInfo}>
-            <span>브랜드명</span>
-            <span>YYYY</span>
-          </div>
-          <p className={homeStyles.contentTitle}>title</p>
+          <p className={postStyles.contentTitle}>{example.title}</p>
           <div
-            className={`${homeStyles.contentScrollWrap} ${homeStyles.scrollWrap}`}
+            className={`${commonStyles.contentScrollWrap} ${commonStyles.scrollWrap}`}
           >
-            <p className={homeStyles.contentText}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industrys standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p>
+            <p className={postStyles.contentText}>{example.contents}</p>
           </div>
-          <div className={homeStyles.moreInfo}>
-            <span>장소</span>
-            <span>누구와</span>
-            <span>음식</span>
+          <div className={postStyles.moreInfo}>
+            <span>{example.location}</span>
+            <span>{example.people}</span>
+            <span>{example.food}</span>
           </div>
         </div>
-        <button className={homeStyles.btnClose} onClick={onClickClose}></button>
+        <button
+          className={commonStyles.btnClose}
+          onClick={onClickClose}
+        ></button>
       </article>
     </div>
   );

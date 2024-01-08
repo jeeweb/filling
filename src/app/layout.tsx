@@ -3,7 +3,7 @@ import { Nav } from "./Nav";
 import Link from "next/link";
 import "./reset.css";
 import { Noto_Sans_KR, Black_Han_Sans } from "next/font/google";
-import * as styles from "./common.css";
+import * as commonStyles from "./common.css";
 
 export const metadata: Metadata = {
   title: "필링",
@@ -25,22 +25,27 @@ export const blackHanSans = Black_Han_Sans({
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html
       lang="ko"
       className={`${notoSansKr.variable} ${blackHanSans.variable}`}
     >
-      <body className={styles.common}>
-        <header className={styles.header}>
-          <h1 className={styles.logo}>
+      <body className={commonStyles.common}>
+        <header className={commonStyles.header}>
+          <h1 className={commonStyles.logo}>
             <Link href="/">필링</Link>
           </h1>
           <Nav />
         </header>
-        <section className={styles.container}>{children}</section>
+        <div className={commonStyles.container}>
+          {children}
+          {modal}
+        </div>
       </body>
     </html>
   );
