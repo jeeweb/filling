@@ -1,7 +1,7 @@
 import Link from "next/link";
 import * as commonStyles from "./common.css";
 import * as cardStyles from "@/app/_component/card.css";
-import CardItem from "./_component/CardItem";
+import Card from "./_component/Card";
 
 export default function Home() {
   return (
@@ -19,9 +19,9 @@ export default function Home() {
           className={`${commonStyles.scrollWrap} ${commonStyles.cardScrollWrap}`}
         >
           <ul className={cardStyles.cardList}>
-            <CardItem />
-            <CardItem />
-            <CardItem />
+            <Card />
+            <Card />
+            <Card />
           </ul>
         </div>
       </section>

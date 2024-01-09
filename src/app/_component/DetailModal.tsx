@@ -13,10 +13,11 @@ export default function DetailModal() {
   };
 
   const example = {
-    id: "1",
+    postId: "1",
     image: "/sample1.jpeg",
-    drink: "Corona",
-    date: "2024. 01. 02",
+    tags: [{ tagId: "tag01", item: "맥주" }],
+    brand: "Corona",
+    createdAt: new Date(),
     weather: "맑음",
     location: "비틀비틀",
     people: "홍길동",
@@ -33,12 +34,12 @@ export default function DetailModal() {
         </div>
         <div className={postStyles.summaryTextBox}>
           <div className={postStyles.dayInfo}>
-            <span>{example.date}</span>
+            <span>{/*example.createdAt*/}</span>
             <span className={postStyles.dayWeather}>{example.weather}</span>
           </div>
-          <TagList />
+          <TagList tags={example.tags} />
           <div className={postStyles.drinkInfo}>
-            <span>{example.drink}</span>
+            <span>{example.brand}</span>
           </div>
           <p className={postStyles.contentTitle}>{example.title}</p>
           <div
