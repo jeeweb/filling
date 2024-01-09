@@ -1,35 +1,47 @@
-"use client ";
+"use client";
 
-import Link from "next/link";
-import Image from "next/image";
+import { ReactNode } from "react";
 import * as cardStyles from "@/app/_component/card.css";
-import * as postStyles from "@/app/_component/post.css";
-import TagList from "@/app/_component/TagList";
+import { useRouter } from "next/navigation";
 
-export default function CardItem() {
-  const example = {
-    id: "1",
-    image: "/sample1.jpeg",
-    title: "제목 예시",
-    date: "2024. 01. 02",
-    weather: "맑음",
+type Tag = {
+  tagId: string;
+  item: string;
+};
+
+type Props = {
+  children: ReactNode;
+  post: {
+    postId: string;
+    tags: Tag[];
+    image: string;
+    brand?: string;
+    country?: string;
+    brewery?: string;
+    type?: string;
+    vintage?: Date;
+    name?: string;
+    base?: string;
+    ingredients?: string;
+    drink?: string;
+    createdAt: Date;
+    weather?: string;
+    location: string;
+    people?: string;
+    food: string;
+    title: string;
+    contents: string;
   };
+};
 
+export default function CardItem({ children, post }: Props) {
+  const router = useRouter();
+  const onClick = () => {
+    router.push(`/posts/${post.postId}`);
+  };
   return (
-    <li className={cardStyles.cardItem}>
-      <Link href={`/posts/${example.id}`} className={cardStyles.linkDetail}>
-        <div className={postStyles.imgBox}>
-          <Image src={example.image} alt="" fill={true} objectFit="cover" />
-        </div>
-        <div className={postStyles.summaryTextBox}>
-          <TagList />
-          <p>{example.title}</p>
-          <div className={postStyles.dayInfo}>
-            <span>{example.date}</span>
-            <span className={postStyles.dayWeather}>{example.weather}</span>
-          </div>
-        </div>
-      </Link>
+    <li className={cardStyles.cardItem} onClick={onClick}>
+      {children}
     </li>
   );
 }

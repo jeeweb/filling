@@ -1,17 +1,30 @@
-"use client";
 import * as postStyles from "@/app/_component/post.css";
 
-export default function TagList() {
-  const example = {
-    category: "맥주",
-  };
+type Tag = {
+  tagId: string;
+  item: string;
+};
+
+export default function TagList({ tags }: { tags: Tag[] }) {
   return (
     <div className={postStyles.tagList}>
-      <span className={`${postStyles.tagItem} ${postStyles.drinkTag}`}>
-        {example.category}
-      </span>
-      <span className={postStyles.tagItem}>선택1</span>
-      <span className={postStyles.tagItem}>선택2</span>
+      {tags.map((tag, index) => {
+        if (index === 0) {
+          return (
+            <span
+              key={index}
+              className={`${postStyles.tagItem} ${postStyles.drinkTag}`}
+            >
+              {tag.item}
+            </span>
+          );
+        }
+        return (
+          <span key={index} className={postStyles.tagItem}>
+            {tag.item}
+          </span>
+        );
+      })}
     </div>
   );
 }
