@@ -3,7 +3,21 @@ import * as commonStyles from "./common.css";
 import * as cardStyles from "@/app/_component/card.css";
 import Card from "./_component/Card";
 
-export default function Home() {
+const example = {
+  postId: "123",
+  image: "/sample1.jpeg",
+  tags: [{ tagId: "tag01", item: "맥주" }],
+  brand: "Corona",
+  createdAt: new Date(),
+  weather: "맑음",
+  location: "비틀비틀",
+  people: "홍길동",
+  food: "타코",
+  title: "제목 예시",
+  contents: "컨텐츠 예시입니다",
+};
+
+export default async function Home() {
   return (
     <>
       <section className={commonStyles.noContentsBox}>
@@ -19,9 +33,7 @@ export default function Home() {
           className={`${commonStyles.scrollWrap} ${commonStyles.cardScrollWrap}`}
         >
           <ul className={cardStyles.cardList}>
-            <Card />
-            <Card />
-            <Card />
+            <Card post={example} />
           </ul>
         </div>
       </section>
