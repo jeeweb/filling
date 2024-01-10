@@ -1,39 +1,50 @@
-import Link from "next/link";
 import Image from "next/image";
 import * as cardStyles from "@/app/_component/card.css";
 import * as postStyles from "@/app/_component/post.css";
 import TagList from "@/app/_component/TagList";
 import CardItem from "./CardItem";
 
-export default function Card() {
-  const example = {
-    postId: "1",
-    image: "/sample1.jpeg",
-    tags: [
-      { tagId: "tag01", item: "맥주" },
-      { tagId: "tag02", item: "라거" },
-    ],
-    brand: "Corona",
-    createdAt: new Date(),
-    weather: "맑음",
-    location: "비틀비틀",
-    people: "홍길동",
-    food: "타코",
-    title: "제목 예시",
-    contents: "컨텐츠 예시입니다",
-  };
+type Tag = {
+  tagId: string;
+  item: string;
+};
 
+type Props = {
+  post: {
+    postId: string;
+    tags: Tag[];
+    image: string;
+    brand?: string;
+    country?: string;
+    brewery?: string;
+    type?: string;
+    vintage?: Date;
+    name?: string;
+    base?: string;
+    ingredients?: string;
+    drink?: string;
+    createdAt: Date;
+    weather?: string;
+    location: string;
+    people?: string;
+    food: string;
+    title: string;
+    contents: string;
+  };
+};
+
+export default function Card({ post }: Props) {
   return (
-    <CardItem post={example}>
+    <CardItem post={post}>
       <div className={postStyles.imgBox}>
-        <Image src={example.image} alt="" fill={true} />
+        <Image src={post.image} alt="" fill={true} />
       </div>
       <div className={postStyles.summaryTextBox}>
-        <TagList tags={example.tags} />
-        <p>{example.title}</p>
+        <TagList tags={post.tags} />
+        <p>{post.title}</p>
         <div className={postStyles.dayInfo}>
-          <span>{/*example.createdAt*/}</span>
-          <span className={postStyles.dayWeather}>{example.weather}</span>
+          <span>{/*post.createdAt*/}</span>
+          <span className={postStyles.dayWeather}>{post.weather}</span>
         </div>
       </div>
     </CardItem>
