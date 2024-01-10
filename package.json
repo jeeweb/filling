@@ -21,6 +21,10 @@
     "@vanilla-extract/next-plugin": "^2.3.2",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "msw": "^2.0.12",
     "typescript": "^5"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import "./reset.css";
 import { Noto_Sans_KR, Black_Han_Sans } from "next/font/google";
 import * as commonStyles from "./common.css";
+import { MockService } from "./_component/MockService";
 
 export const metadata: Metadata = {
   title: "필링",
@@ -36,6 +37,7 @@ export default function RootLayout({
       className={`${notoSansKr.variable} ${blackHanSans.variable}`}
     >
       <body className={commonStyles.common}>
+        <MockService />
         <header className={commonStyles.header}>
           <h1 className={commonStyles.logo}>
             <Link href="/">필링</Link>
