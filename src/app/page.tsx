@@ -17,7 +17,7 @@ const example = {
   contents: "컨텐츠 예시입니다",
 };
 
-export default async function Home() {
+export default function Home() {
   return (
     <>
       <section className={commonStyles.noContentsBox}>

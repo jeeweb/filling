@@ -109,26 +109,57 @@ export const handlers = [
         contents: "컨텐츠 예시입니다",
       },
       {
-        postId: "post02",
-        tags: DrinkData[4],
+        postId: "post2",
         image: "/sample2.jpeg",
-        name: "Springfield Wild Yeast",
-        vintage: 2019,
-        createdAt: "2022. 04. 01",
+        tags: [
+          { tagId: "tag01", item: DrinkData[4].category },
+          { tagId: "tag02", item: DrinkData[4].types![1] },
+          { tagId: "tag03", item: DrinkData[5].country![0] },
+        ],
+        brand: "Wild Yeast Chardonnay",
+        createdAt: new Date(),
         weather: "비",
         location: "와인바",
         people: "홍길동",
-        food: "가리비 관자",
-        title: "제목 입니다",
-        contents:
-          "컨텐츠 내용 예시입니다 컨텐츠 내용 예시입니다 컨텐츠 내용 예시입니다",
+        food: "가리비관자구이",
+        title: "제목 예시22",
+        contents: "맛있는 샤도네이 발견",
       },
     ]);
   }),
   http.get("/api/posts/:postId", ({ request, params }) => {
     const { postId } = params;
-    return HttpResponse.json({
-      postId,
-    });
+    return HttpResponse.json([
+      {
+        postId: "post1",
+        image: "/sample1.jpeg",
+        tags: [{ tagId: "tag01", item: DrinkData[1].category }],
+        brand: "Corona",
+        createdAt: new Date(),
+        weather: "맑음",
+        location: "비틀비틀",
+        people: "홍길동",
+        food: "타코",
+        title: "제목 예시",
+        contents: "컨텐츠 예시입니다",
+      },
+      {
+        postId: "post2",
+        image: "/sample2.jpeg",
+        tags: [
+          { tagId: "tag01", item: DrinkData[4].category },
+          { tagId: "tag02", item: DrinkData[4].types![1] },
+          { tagId: "tag03", item: DrinkData[5].country![0] },
+        ],
+        brand: "Wild Yeast Chardonnay",
+        createdAt: new Date(),
+        weather: "비",
+        location: "와인바",
+        people: "홍길동",
+        food: "가리비관자구이",
+        title: "제목 예시22",
+        contents: "맛있는 샤도네이 발견",
+      },
+    ]);
   }),
 ];
