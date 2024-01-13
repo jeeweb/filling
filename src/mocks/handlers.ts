@@ -1,4 +1,4 @@
-import { http, HttpResponse } from "msw";
+import { http, HttpResponse, StrictResponse } from "msw";
 
 const DrinkData = [
   {
@@ -92,74 +92,50 @@ const DrinkData = [
   },
 ];
 
+const MockData = [
+  {
+    postId: "post01",
+    tags: [{ tagId: "tag01", item: DrinkData[1].category }],
+    image: "/sample1.jpeg",
+    brand: "Corona",
+    createdAt: new Date(),
+    weather: "맑음",
+    location: "비틀비틀",
+    people: "홍길동",
+    food: "타코",
+    title: "제목 예시",
+    contents: "컨텐츠 예시입니다",
+  },
+  {
+    postId: "post2",
+    image: "/sample2.jpg",
+    tags: [
+      { tagId: "tag01", item: DrinkData[4].category },
+      { tagId: "tag02", item: DrinkData[4].types![1] },
+      { tagId: "tag03", item: DrinkData[4].country![0] },
+    ],
+    brand: "Wild Yeast Chardonnay",
+    vintage: 2019,
+    createdAt: new Date(),
+    weather: "비",
+    location: "와인바",
+    people: "홍길동",
+    food: "가리비관자구이",
+    title: "화이트와인",
+    contents: "맛있는 샤도네이 발견",
+  },
+];
+
 export const handlers = [
   http.get("/api/posts", ({ request }) => {
-    return HttpResponse.json([
-      {
-        postId: "post01",
-        tags: [{ tagId: "tag01", item: DrinkData[1].category }],
-        image: "/sample1.jpeg",
-        brand: "Corona",
-        createdAt: new Date(),
-        weather: "맑음",
-        location: "비틀비틀",
-        people: "홍길동",
-        food: "타코",
-        title: "제목 예시",
-        contents: "컨텐츠 예시입니다",
-      },
-      {
-        postId: "post2",
-        image: "/sample2.jpg",
-        tags: [
-          { tagId: "tag01", item: DrinkData[4].category },
-          { tagId: "tag02", item: DrinkData[4].types![1] },
-          { tagId: "tag03", item: DrinkData[4].country![0] },
-        ],
-        brand: "Wild Yeast Chardonnay",
-        createdAt: new Date(),
-        weather: "비",
-        location: "와인바",
-        people: "홍길동",
-        food: "가리비관자구이",
-        title: "화이트와인",
-        contents: "맛있는 샤도네이 발견",
-      },
-    ]);
+    return HttpResponse.json(MockData);
   }),
   http.get("/api/posts/:postId", ({ request, params }) => {
     const { postId } = params;
-    return HttpResponse.json([
-      {
-        postId: "post1",
-        image: "/sample1.jpeg",
-        tags: [{ tagId: "tag01", item: DrinkData[1].category }],
-        brand: "Corona",
-        createdAt: new Date(),
-        weather: "맑음",
-        location: "비틀비틀",
-        people: "홍길동",
-        food: "타코",
-        title: "제목 예시",
-        contents: "컨텐츠 예시입니다",
-      },
-      {
-        postId: "post2",
-        image: "/sample2.jpeg",
-        tags: [
-          { tagId: "tag01", item: DrinkData[4].category },
-          { tagId: "tag02", item: DrinkData[4].types![1] },
-          { tagId: "tag03", item: DrinkData[4].country![0] },
-        ],
-        brand: "Wild Yeast Chardonnay",
-        createdAt: new Date(),
-        weather: "비",
-        location: "와인바",
-        people: "홍길동",
-        food: "가리비관자구이",
-        title: "제목 예시22",
-        contents: "맛있는 샤도네이 발견",
-      },
-    ]);
+    const postDetail = MockData.find((data) => data.postId === postId);
+    if (postDetail) {
+      return HttpResponse.json(postDetail);
+    }
+    return HttpResponse.json({ message: "no_data" }, { status: 404 });
   }),
 ];
