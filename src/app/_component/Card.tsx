@@ -3,37 +3,9 @@ import * as cardStyles from "@/app/_component/card.css";
 import * as postStyles from "@/app/_component/post.css";
 import TagList from "@/app/_component/TagList";
 import CardItem from "./CardItem";
+import { Post } from "@/types/Post";
 
-type Tag = {
-  tagId: string;
-  item: string;
-};
-
-type Props = {
-  post: {
-    postId: string;
-    tags: Tag[];
-    image: string;
-    brand?: string;
-    country?: string;
-    brewery?: string;
-    type?: string;
-    vintage?: Date;
-    name?: string;
-    base?: string;
-    ingredients?: string;
-    drink?: string;
-    createdAt: Date;
-    weather?: string;
-    location: string;
-    people?: string;
-    food: string;
-    title: string;
-    contents: string;
-  };
-};
-
-export default function Card({ post }: Props) {
+export default function Card({ post }: { post: Post }) {
   return (
     <CardItem post={post}>
       <div className={postStyles.imgBox}>
@@ -43,7 +15,9 @@ export default function Card({ post }: Props) {
         <TagList tags={post.tags} />
         <p>{post.title}</p>
         <div className={postStyles.dayInfo}>
-          <span>{/*post.createdAt*/}</span>
+          <span>{`${new Date().getFullYear()}. ${
+            new Date().getMonth() + 1
+          }. ${new Date().getDate()}`}</span>
           <span className={postStyles.dayWeather}>{post.weather}</span>
         </div>
       </div>

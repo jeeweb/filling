@@ -1,23 +1,33 @@
 import Link from "next/link";
 import * as commonStyles from "./common.css";
 import * as cardStyles from "@/app/_component/card.css";
-import Card from "./_component/Card";
-
-const example = {
-  postId: "123",
-  image: "/sample1.jpeg",
-  tags: [{ tagId: "tag01", item: "맥주" }],
-  brand: "Corona",
-  createdAt: new Date(),
-  weather: "맑음",
-  location: "비틀비틀",
-  people: "홍길동",
-  food: "타코",
-  title: "제목 예시",
-  contents: "컨텐츠 예시입니다",
-};
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
+import CardList from "./_component/CardList";
 
 export default async function Home() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["list"],
+    queryFn: async () => {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`
+      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      return data;
+    },
+  });
+
+  const dehydratedStae = dehydrate(queryClient);
+
   return (
     <>
       <section className={commonStyles.noContentsBox}>
@@ -29,13 +39,15 @@ export default async function Home() {
         </div>
       </section>
       <section className={commonStyles.contentsBox}>
-        <div
-          className={`${commonStyles.scrollWrap} ${commonStyles.cardScrollWrap}`}
-        >
-          <ul className={cardStyles.cardList}>
-            <Card post={example} />
-          </ul>
-        </div>
+        <HydrationBoundary state={dehydratedStae}>
+          <div
+            className={`${commonStyles.scrollWrap} ${commonStyles.cardScrollWrap}`}
+          >
+            <ul className={cardStyles.cardList}>
+              <CardList />
+            </ul>
+          </div>
+        </HydrationBoundary>
       </section>
     </>
   );

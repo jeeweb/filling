@@ -3,38 +3,15 @@
 import { ReactNode } from "react";
 import * as cardStyles from "@/app/_component/card.css";
 import { useRouter } from "next/navigation";
+import { Post } from "@/types/Post";
 
-type Tag = {
-  tagId: string;
-  item: string;
-};
-
-type Props = {
+export default function CardItem({
+  children,
+  post,
+}: {
   children: ReactNode;
-  post: {
-    postId: string;
-    tags: Tag[];
-    image: string;
-    brand?: string;
-    country?: string;
-    brewery?: string;
-    type?: string;
-    vintage?: Date;
-    name?: string;
-    base?: string;
-    ingredients?: string;
-    drink?: string;
-    createdAt: Date;
-    weather?: string;
-    location: string;
-    people?: string;
-    food: string;
-    title: string;
-    contents: string;
-  };
-};
-
-export default function CardItem({ children, post }: Props) {
+  post: Post;
+}) {
   const router = useRouter();
   const onClick = () => {
     router.push(`/posts/${post.postId}`);

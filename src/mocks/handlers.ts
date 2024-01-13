@@ -97,10 +97,10 @@ export const handlers = [
     return HttpResponse.json([
       {
         postId: "post01",
-        tags: DrinkData[1],
+        tags: [{ tagId: "tag01", item: DrinkData[1].category }],
         image: "/sample1.jpeg",
         brand: "Corona",
-        createdAt: "2023. 07. 28",
+        createdAt: new Date(),
         weather: "맑음",
         location: "비틀비틀",
         people: "홍길동",
@@ -110,11 +110,11 @@ export const handlers = [
       },
       {
         postId: "post2",
-        image: "/sample2.jpeg",
+        image: "/sample2.jpg",
         tags: [
           { tagId: "tag01", item: DrinkData[4].category },
           { tagId: "tag02", item: DrinkData[4].types![1] },
-          { tagId: "tag03", item: DrinkData[5].country![0] },
+          { tagId: "tag03", item: DrinkData[4].country![0] },
         ],
         brand: "Wild Yeast Chardonnay",
         createdAt: new Date(),
@@ -122,7 +122,7 @@ export const handlers = [
         location: "와인바",
         people: "홍길동",
         food: "가리비관자구이",
-        title: "제목 예시22",
+        title: "화이트와인",
         contents: "맛있는 샤도네이 발견",
       },
     ]);
@@ -149,7 +149,7 @@ export const handlers = [
         tags: [
           { tagId: "tag01", item: DrinkData[4].category },
           { tagId: "tag02", item: DrinkData[4].types![1] },
-          { tagId: "tag03", item: DrinkData[5].country![0] },
+          { tagId: "tag03", item: DrinkData[4].country![0] },
         ],
         brand: "Wild Yeast Chardonnay",
         createdAt: new Date(),
