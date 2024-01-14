@@ -1,6 +1,5 @@
 import Link from "next/link";
 import * as commonStyles from "./common.css";
-import * as cardStyles from "@/app/_component/card.css";
 import {
   HydrationBoundary,
   QueryClient,
@@ -43,7 +42,7 @@ export default async function Home() {
           <div
             className={`${commonStyles.scrollWrap} ${commonStyles.cardScrollWrap}`}
           >
-            <ul className={cardStyles.cardList}>
+            <ul className={commonStyles.cardList}>
               <CardList />
             </ul>
           </div>

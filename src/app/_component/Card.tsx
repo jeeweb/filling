@@ -1,5 +1,4 @@
 import Image from "next/image";
-import * as cardStyles from "@/app/_component/card.css";
 import * as postStyles from "@/app/_component/post.css";
 import TagList from "@/app/_component/TagList";
 import CardItem from "./CardItem";

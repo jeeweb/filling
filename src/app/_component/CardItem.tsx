@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import * as cardStyles from "@/app/_component/card.css";
+import * as commonStyles from "@/app/common.css";
 import { useRouter } from "next/navigation";
 import { Post } from "@/types/Post";
 
@@ -17,7 +17,7 @@ export default function CardItem({
     router.push(`/posts/${post.postId}`);
   };
   return (
-    <li className={cardStyles.cardItem} onClick={onClick}>
+    <li className={commonStyles.cardItem} onClick={onClick}>
       {children}
     </li>
   );

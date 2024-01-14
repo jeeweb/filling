@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "@/app/theme.css";
-import { cardItem } from "@/app/_component/card.css";
+import { cardItem } from "@/app/common.css";
 
 export const detailBox = style({
   position: "relative",
