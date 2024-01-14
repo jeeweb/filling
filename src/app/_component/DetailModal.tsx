@@ -9,11 +9,9 @@ import { Post } from "@/types/Post";
 import { useQuery } from "@tanstack/react-query";
 
 export default function DetailModal({ id }: { id: string }) {
-  console.log(id);
   const { data: post, error } = useQuery<Post>({
     queryKey: ["post", id],
     queryFn: async ({ queryKey }) => {
-      console.log(queryKey);
       const [_1, id] = queryKey;
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${id}`
@@ -37,7 +35,7 @@ export default function DetailModal({ id }: { id: string }) {
     <div className={commonStyles.modalWrap}>
       <article className={postStyles.detailBox}>
         <div className={postStyles.imgBox}>
-          <Image src={post.image} alt="" fill={true} objectFit="cover" />
+          <Image src={post.image} alt="" fill={true} priority />
         </div>
         <div className={postStyles.summaryTextBox}>
           <div className={postStyles.dayInfo}>

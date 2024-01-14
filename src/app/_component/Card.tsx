@@ -8,7 +8,7 @@ export default function Card({ post }: { post: Post }) {
   return (
     <CardItem post={post}>
       <div className={postStyles.imgBox}>
-        <Image src={post.image} alt="" fill={true} />
+        <Image src={post.image} alt="" fill={true} priority />
       </div>
       <div className={postStyles.summaryTextBox}>
         <TagList tags={post.tags} />
