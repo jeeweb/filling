@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "@/app/theme.css";
-import { cardItem } from "@/app/common.css";
+import { cardList, boardList, postItem } from "@/app/common.css";
 
 export const detailBox = style({
   position: "relative",
@@ -20,9 +20,11 @@ export const detailBox = style({
 export const summaryTextBox = style({
   position: "relative",
   selectors: {
-    [`${cardItem} &`]: {
+    [`${postItem} &`]: {
       flex: 1,
-      paddingTop: "16px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
     },
     [`${detailBox} &`]: {
       padding: "24px",
@@ -35,8 +37,12 @@ export const imgBox = style({
   position: "relative",
   overflow: "hidden",
   selectors: {
-    [`${cardItem} &`]: {
+    [`${cardList} &`]: {
       height: "80%",
+    },
+    [`${boardList} &`]: {
+      width: "92px",
+      height: "100%",
     },
     [`${detailBox} &`]: {
       flex: 1,
@@ -50,7 +56,6 @@ export const tagList = style({
   alignItems: "center",
   gap: "4px",
   width: "100%",
-  marginBottom: "12px",
   overflow: "hidden",
 });
 
@@ -68,10 +73,13 @@ export const drinkTag = style({
 export const drinkInfo = style({
   display: "flex",
   gap: "4px",
+  fontSize: "12px",
+  [`${detailBox} &`]: {
+    fontSize: "16px",
+  },
 });
 
 export const contentTitle = style({
-  margin: "8px 0",
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -84,9 +92,7 @@ export const contentText = style({
 
 export const dayInfo = style({
   selectors: {
-    [`${cardItem} &`]: {
-      position: "absolute",
-      bottom: "0",
+    [`${postItem} &`]: {
       fontSize: "12px",
     },
     [`${detailBox} &`]: {

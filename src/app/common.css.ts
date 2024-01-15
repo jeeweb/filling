@@ -22,7 +22,7 @@ export const header = style({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "0 120px",
+  padding: "0 8vw",
   width: "100vw",
   height: "60px",
   backgroundColor: "#fff",
@@ -37,8 +37,8 @@ export const navList = style({
 
 export const container = style({
   position: "relative",
-  height: "100vh",
-  paddingTop: "60px",
+  top: "60px",
+  height: "calc(100vh - 60px)",
 });
 
 export const logo = style({
@@ -90,9 +90,19 @@ export const controlWrap = style({
 });
 
 export const contentsBox = style({
+  position: "relative",
   height: "100%",
   width: "100vw",
   overflow: "hidden",
+});
+
+export const btnListStyleWrap = style({
+  position: "absolute",
+  top: "12px",
+  left: "8vw",
+  display: "flex",
+  alignItems: "center",
+  gap: "4px",
 });
 
 export const cardScrollWrap = style({});
@@ -113,8 +123,9 @@ export const scrollWrap = style({
   },
   selectors: {
     [`&.${cardScrollWrap}`]: {
-      padding: "8vh",
-      height: "100%",
+      padding: "0 8vw",
+      marginTop: "52px",
+      height: "calc(100% - 52px)",
     },
     [`&.${contentScrollWrap}`]: {
       height: "calc(100% - 126px)",
@@ -136,6 +147,22 @@ export const infoText = style({
 });
 
 /** Buttons **/
+export const btnListStyle = style({
+  display: "inline-block",
+  padding: "4px 8px",
+  textAlign: "center",
+  borderRadius: "16px",
+  backgroundColor: vars.bgColor.gray,
+  fontSize: "14px",
+  transition: "0.2s",
+  selectors: {
+    "&:hover": {
+      backgroundColor: vars.bgColor.black,
+      color: vars.color.selected,
+    },
+  },
+});
+
 export const btnWrite = style({
   display: "inline-block",
   padding: "8px 12px",
@@ -160,24 +187,43 @@ export const btnClose = style({
   backgroundImage: "url('/btn-close.png')",
 });
 
-/** CardList **/
+/** PostList **/
 export const cardList = style({
   display: "flex",
   gap: "8px",
-  flexDirection: "column", // 임시로 수직방향으로 변경
 });
 
-export const cardItem = style({
+export const boardList = style({
+  display: "flex",
+  gap: "8px",
+  flexDirection: "column",
+});
+
+export const postItem = style({
   flexShrink: 0,
   display: "flex",
-  flexDirection: "column",
-  width: "400px",
-  height: "64vh",
-  minHeight: "464px",
+  gap: "16px",
   padding: "16px",
   borderRadius: "12px",
   boxShadow: "2px 2px 10px -2px rgba(0,0,0,0.15)",
   cursor: "pointer",
+  selectors: {
+    [`${cardList} &`]: {
+      flexDirection: "column",
+      width: "400px",
+      height: "64vh",
+      minHeight: "464px",
+    },
+    [`${boardList} &`]: {
+      width: "100%",
+      height: "124px",
+    },
+  },
+});
+
+export const btnActive = style({
+  backgroundColor: vars.bgColor.black,
+  color: vars.color.selected,
 });
 
 /** Modal **/

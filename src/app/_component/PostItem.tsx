@@ -3,21 +3,21 @@
 import { ReactNode } from "react";
 import * as commonStyles from "@/app/common.css";
 import { useRouter } from "next/navigation";
-import { Post } from "@/types/Post";
+import { IPost } from "@/types/Post";
 
-export default function CardItem({
+export default function PostItem({
   children,
   post,
 }: {
   children: ReactNode;
-  post: Post;
+  post: IPost;
 }) {
   const router = useRouter();
   const onClick = () => {
     router.push(`/posts/${post.postId}`);
   };
   return (
-    <li className={commonStyles.cardItem} onClick={onClick}>
+    <li className={commonStyles.postItem} onClick={onClick}>
       {children}
     </li>
   );

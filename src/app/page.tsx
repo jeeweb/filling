@@ -1,11 +1,11 @@
 import Link from "next/link";
-import * as commonStyles from "./common.css";
 import {
   HydrationBoundary,
   QueryClient,
   dehydrate,
 } from "@tanstack/react-query";
-import CardList from "./_component/CardList";
+import PostListWrap from "./_component/PostListWrap";
+import * as commonStyles from "./common.css";
 
 export default async function Home() {
   const queryClient = new QueryClient();
@@ -40,13 +40,7 @@ export default async function Home() {
       </section>
       <section className={commonStyles.contentsBox}>
         <HydrationBoundary state={dehydratedStae}>
-          <div
-            className={`${commonStyles.scrollWrap} ${commonStyles.cardScrollWrap}`}
-          >
-            <ul className={commonStyles.cardList}>
-              <CardList />
-            </ul>
-          </div>
+          <PostListWrap />
         </HydrationBoundary>
       </section>
     </>

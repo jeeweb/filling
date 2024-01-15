@@ -5,11 +5,11 @@ import { useRouter } from "next/navigation";
 import * as commonStyles from "@/app/common.css";
 import * as postStyles from "@/app/_component/post.css";
 import TagList from "./TagList";
-import { Post } from "@/types/Post";
+import { IPost } from "@/types/Post";
 import { useQuery } from "@tanstack/react-query";
 
 export default function DetailModal({ id }: { id: string }) {
-  const { data: post, error } = useQuery<Post>({
+  const { data: post, error } = useQuery<IPost>({
     queryKey: ["post", id],
     queryFn: async ({ queryKey }) => {
       const [_1, id] = queryKey;
