@@ -29,7 +29,14 @@ export default function DetailModal({ id }: { id: string }) {
   };
 
   if (!post) {
-    return <div>게시글을 찾을 수 없습니다</div>;
+    return (
+      <div className={`${commonStyles.noContentsBox} ${commonStyles.tempShow}`}>
+        <div className={commonStyles.controlWrap}>
+          <span style={{ fontSize: "36px" }}>🫥</span>
+          <p className={commonStyles.infoText}>게시글을 찾을 수 없습니다</p>
+        </div>
+      </div>
+    );
   }
   return (
     <div className={commonStyles.modalWrap}>

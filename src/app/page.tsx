@@ -9,8 +9,8 @@ import CardList from "./_component/CardList";
 
 export default async function Home() {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ["list"],
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ["posts"],
     queryFn: async () => {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`
@@ -23,6 +23,7 @@ export default async function Home() {
 
       return data;
     },
+    initialPageParam: 0,
   });
 
   const dehydratedStae = dehydrate(queryClient);
