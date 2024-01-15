@@ -6,6 +6,15 @@ export const common = style({
   fontFamily: vars.font.common,
 });
 
+export const loadingSpinner = style({
+  position: "absolute",
+  top: "40vh",
+  left: "0",
+  display: "flex",
+  justifyContent: "center",
+  width: "100vw",
+});
+
 export const header = style({
   position: "absolute",
   top: "0",
@@ -27,6 +36,7 @@ export const navList = style({
 });
 
 export const container = style({
+  position: "relative",
   height: "100vh",
   paddingTop: "60px",
 });
@@ -49,8 +59,10 @@ export const inner = style({
   width: "1000px",
 });
 
+export const tempShow = style({});
+
 export const noContentsBox = style({
-  display: "none",
+  display: "none", // 임시
   // display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -58,6 +70,12 @@ export const noContentsBox = style({
   width: "100%",
   backgroundColor: vars.bgColor.gray,
   textAlign: "center",
+  // 임시
+  selectors: {
+    [`&.${tempShow}`]: {
+      display: "flex",
+    },
+  },
 });
 
 export const controlWrap = style({
@@ -96,6 +114,7 @@ export const scrollWrap = style({
   selectors: {
     [`&.${cardScrollWrap}`]: {
       padding: "8vh",
+      height: "100%",
     },
     [`&.${contentScrollWrap}`]: {
       height: "calc(100% - 126px)",
@@ -145,6 +164,7 @@ export const btnClose = style({
 export const cardList = style({
   display: "flex",
   gap: "8px",
+  flexDirection: "column", // 임시로 수직방향으로 변경
 });
 
 export const cardItem = style({
@@ -172,4 +192,19 @@ export const modalWrap = style({
   height: "100vh",
   backgroundColor: "rgba(0,0,0,0.5)",
   zIndex: "100",
+});
+
+export const modalError = style({
+  position: "absolute",
+  top: "60px",
+  left: "0",
+  display: "flex",
+  justifyContent: "center",
+  width: "100vw",
+  height: "calc(100% - 60px)",
+  paddingTop: "10%",
+  textAlign: "center",
+  backgroundColor: "rgba(0,0,0,0.5)",
+  //color: vars.color.secondary,
+  fontSize: "20px",
 });
