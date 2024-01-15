@@ -1,15 +1,15 @@
 "use client";
 
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
-import Card from "./Card";
-import { Post } from "@/types/Post";
+import Post from "./Post";
+import { IPost } from "@/types/Post";
 import { Fragment, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import * as commonStyles from "@/app/common.css";
 
-export default function CardList() {
+export default function PostList() {
   const { data, fetchNextPage, hasNextPage, isFetching, isLoading, isError } =
-    useInfiniteQuery<Post[], InfiniteData<Post[]>>({
+    useInfiniteQuery<IPost[], InfiniteData<IPost[]>>({
       queryKey: ["posts"],
       queryFn: async () => {
         const response = await fetch(
@@ -98,7 +98,7 @@ export default function CardList() {
       {data?.pages.map((page, idx) => (
         <Fragment key={idx}>
           {page.map((post) => (
-            <Card key={post.postId} post={post} />
+            <Post key={post.postId} post={post} />
           ))}
         </Fragment>
       ))}

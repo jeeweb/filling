@@ -83,7 +83,7 @@ const DrinkData = [
   {
     drinkId: "d11",
     category: "칵테일",
-    // 이름(name), 베이스(base), 사용재료(ingredients) 직접 입력
+    // 이름(brand), 베이스(base), 사용재료(ingredients) 직접 입력
   },
   {
     drinkId: "d12",
@@ -141,7 +141,7 @@ const MockData = [
     postId: "post04",
     image: "/sample4.jpg",
     tags: [{ tagId: "tag01", item: DrinkData[10].category }],
-    name: "진토닉",
+    brand: "진토닉",
     base: "Monkey47",
     createdAt: new Date(),
     weather: "흐림",

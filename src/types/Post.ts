@@ -3,11 +3,11 @@ export interface Tag {
   item: string;
 }
 
-export interface Post {
+export interface IPost {
   postId: string;
   tags: Tag[];
   image: string;
-  brand?: string;
+  brand: string;
   country?: string;
   brewery?: string;
   type?: string;
