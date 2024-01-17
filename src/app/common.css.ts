@@ -191,6 +191,7 @@ export const btnClose = style({
 export const cardList = style({
   display: "flex",
   gap: "8px",
+  flexWrap: "wrap", // 가로스크롤구현 전 임시로 적용
 });
 
 export const boardList = style({

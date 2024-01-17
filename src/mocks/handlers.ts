@@ -151,42 +151,78 @@ const MockData = [
     title: "titletitle",
     contents: "contents contents contents contents",
   },
-  {
-    postId: "post05",
-    tags: [{ tagId: "tag01", item: DrinkData[1].category }],
-    image: "/sample1.jpeg",
-    brand: "Corona",
-    createdAt: new Date(),
-    weather: "맑음",
-    location: "비틀비틀",
-    people: "홍길동",
-    food: "타코",
-    title: "제목 예시",
-    contents: "컨텐츠 예시입니다",
-  },
-  {
-    postId: "post06",
-    image: "/sample2.jpg",
-    tags: [
-      { tagId: "tag01", item: DrinkData[4].category },
-      { tagId: "tag02", item: DrinkData[4].types![1] },
-      { tagId: "tag03", item: DrinkData[4].country![0] },
-    ],
-    brand: "Wild Yeast Chardonnay",
-    vintage: 2019,
-    createdAt: new Date(),
-    weather: "비",
-    location: "와인바",
-    people: "홍길동",
-    food: "가리비관자구이",
-    title: "제목 예시",
-    contents: "맛있는 샤도네이 발견",
-  },
 ];
 
 export const handlers = [
   http.get("/api/posts", ({ request }) => {
-    return HttpResponse.json(MockData);
+    const url = new URL(request.url);
+    const perPageParam = parseInt(url.searchParams.get("per_page") as string);
+    const pageParam = parseInt(url.searchParams.get("page") as string) || 1;
+
+    return HttpResponse.json([
+      {
+        param: pageParam,
+        postId: "post01",
+        tags: [{ tagId: "tag01", item: DrinkData[1].category }],
+        image: "/sample1.jpeg",
+        brand: "Corona",
+        createdAt: new Date(),
+        weather: "맑음",
+        location: "비틀비틀",
+        people: "홍길동",
+        food: "타코",
+        title: "제목 예시",
+        contents: "컨텐츠 예시입니다",
+      },
+      {
+        param: pageParam + 1,
+        postId: "post02",
+        image: "/sample2.jpg",
+        tags: [
+          { tagId: "tag01", item: DrinkData[4].category },
+          { tagId: "tag02", item: DrinkData[4].types![1] },
+          { tagId: "tag03", item: DrinkData[4].country![0] },
+        ],
+        brand: "Wild Yeast Chardonnay",
+        vintage: 2019,
+        createdAt: new Date(),
+        weather: "비",
+        location: "와인바",
+        people: "홍길동",
+        food: "가리비관자구이",
+        title: "화이트와인",
+        contents: "컨텐츠 예시입니다",
+      },
+      {
+        param: pageParam + 2,
+        postId: "post03",
+        tags: [{ tagId: "tag01", item: DrinkData[1].category }],
+        image: "/sample3.jpg",
+        brand: "노티드 스마일 위트 에일",
+        createdAt: new Date(),
+        weather: "맑음",
+        location: "올림픽공원",
+        people: "김철수, 이영희",
+        food: "",
+        title: "제목",
+        contents: "컨텐츠 예시입니다",
+      },
+      {
+        param: pageParam + 3,
+        postId: "post04",
+        image: "/sample4.jpg",
+        tags: [{ tagId: "tag01", item: DrinkData[10].category }],
+        brand: "진토닉",
+        base: "Monkey47",
+        createdAt: new Date(),
+        weather: "흐림",
+        location: "바",
+        people: "",
+        food: "",
+        title: "titletitle",
+        contents: "contents contents contents contents",
+      },
+    ]);
   }),
   http.get("/api/posts/:postId", ({ request, params }) => {
     const { postId } = params;
