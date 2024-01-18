@@ -5,13 +5,12 @@ import Post from "./Post";
 import { IPost } from "@/types/Post";
 import { Fragment, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import * as commonStyles from "@/app/common.css";
 import { LoadingSpinner } from "./LoadingSpinner";
 
-const LIMIT = 1;
+const LIMIT = 4;
 
 const fetchPosts = async ({ pageParam = 1 }: { pageParam: number }) => {
-  console.log("pageParam: ", pageParam, "perPage: ", LIMIT);
+  // console.log("pageParam: ", pageParam, "perPage: ", LIMIT);
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts?per_page=${LIMIT}&page=${pageParam}`
@@ -33,7 +32,7 @@ export default function PostList() {
         if (lastPage?.length === 0 || lastPage?.length < LIMIT) {
           return undefined;
         }
-        return lastPage.at(-1)?.param + 1;
+        return allPage.length;
       },
       initialPageParam: 0,
     });
