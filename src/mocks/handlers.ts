@@ -1,4 +1,4 @@
-import { http, HttpResponse, StrictResponse } from "msw";
+import { http, HttpResponse } from "msw";
 
 const DrinkData = [
   {
@@ -108,7 +108,7 @@ const MockData = [
   },
   {
     postId: "post02",
-    image: "/sample2.jpg",
+    image: "/sample1.jpeg",
     tags: [
       { tagId: "tag01", item: DrinkData[4].category },
       { tagId: "tag02", item: DrinkData[4].types![1] },
@@ -127,7 +127,7 @@ const MockData = [
   {
     postId: "post03",
     tags: [{ tagId: "tag01", item: DrinkData[1].category }],
-    image: "/sample3.jpg",
+    image: "/sample1.jpeg",
     brand: "노티드 스마일 위트 에일",
     createdAt: new Date(),
     weather: "맑음",
@@ -139,7 +139,123 @@ const MockData = [
   },
   {
     postId: "post04",
-    image: "/sample4.jpg",
+    image: "/sample1.jpeg",
+    tags: [{ tagId: "tag01", item: DrinkData[10].category }],
+    brand: "진토닉",
+    base: "Monkey47",
+    createdAt: new Date(),
+    weather: "흐림",
+    location: "바",
+    people: "",
+    food: "",
+    title: "titletitle",
+    contents: "contents contents contents contents",
+  },
+  {
+    postId: "post05",
+    tags: [{ tagId: "tag01", item: DrinkData[1].category }],
+    image: "/sample2.jpg",
+    brand: "Corona",
+    createdAt: new Date(),
+    weather: "맑음",
+    location: "비틀비틀",
+    people: "홍길동",
+    food: "타코",
+    title: "제목 예시",
+    contents: "컨텐츠 예시입니다",
+  },
+  {
+    postId: "post06",
+    image: "/sample2.jpg",
+    tags: [
+      { tagId: "tag01", item: DrinkData[4].category },
+      { tagId: "tag02", item: DrinkData[4].types![1] },
+      { tagId: "tag03", item: DrinkData[4].country![0] },
+    ],
+    brand: "Wild Yeast Chardonnay",
+    vintage: 2019,
+    createdAt: new Date(),
+    weather: "비",
+    location: "와인바",
+    people: "홍길동",
+    food: "가리비관자구이",
+    title: "화이트와인",
+    contents: "컨텐츠 예시입니다",
+  },
+  {
+    postId: "post07",
+    tags: [{ tagId: "tag01", item: DrinkData[1].category }],
+    image: "/sample2.jpg",
+    brand: "노티드 스마일 위트 에일",
+    createdAt: new Date(),
+    weather: "맑음",
+    location: "올림픽공원",
+    people: "김철수, 이영희",
+    food: "",
+    title: "제목",
+    contents: "컨텐츠 예시입니다",
+  },
+  {
+    postId: "post08",
+    image: "/sample2.jpg",
+    tags: [{ tagId: "tag01", item: DrinkData[10].category }],
+    brand: "진토닉",
+    base: "Monkey47",
+    createdAt: new Date(),
+    weather: "흐림",
+    location: "바",
+    people: "",
+    food: "",
+    title: "titletitle",
+    contents: "contents contents contents contents",
+  },
+  {
+    postId: "post09",
+    tags: [{ tagId: "tag01", item: DrinkData[1].category }],
+    image: "/sample3.jpg",
+    brand: "Corona",
+    createdAt: new Date(),
+    weather: "맑음",
+    location: "비틀비틀",
+    people: "홍길동",
+    food: "타코",
+    title: "제목 예시",
+    contents: "컨텐츠 예시입니다",
+  },
+  {
+    postId: "post10",
+    image: "/sample3.jpg",
+    tags: [
+      { tagId: "tag01", item: DrinkData[4].category },
+      { tagId: "tag02", item: DrinkData[4].types![1] },
+      { tagId: "tag03", item: DrinkData[4].country![0] },
+    ],
+    brand: "Wild Yeast Chardonnay",
+    vintage: 2019,
+    createdAt: new Date(),
+    weather: "비",
+    location: "와인바",
+    people: "홍길동",
+    food: "가리비관자구이",
+    title: "화이트와인",
+    contents: "컨텐츠 예시입니다",
+  },
+  {
+    postId: "post11",
+    tags: [{ tagId: "tag01", item: DrinkData[1].category }],
+    image: "/sample3.jpg",
+    brand: "노티드 스마일 위트 에일",
+    createdAt: new Date(),
+    weather: "맑음",
+    location: "올림픽공원",
+    people: "김철수, 이영희",
+    food: "",
+    title: "제목",
+    contents: "컨텐츠 예시입니다",
+  },
+  {
+    postId: "post12",
+    image: "/sample3.jpg",
     tags: [{ tagId: "tag01", item: DrinkData[10].category }],
     brand: "진토닉",
     base: "Monkey47",
@@ -155,76 +271,21 @@ const MockData = [
 
 export const handlers = [
   http.get("/api/posts", ({ request }) => {
-    const url = new URL(request.url);
-    const perPageParam = parseInt(url.searchParams.get("per_page") as string);
-    const pageParam = parseInt(url.searchParams.get("page") as string) || 1;
+    const searchParams = new URL(request.url).searchParams;
+    const perPageParam = parseInt(searchParams.get("per_page") as string);
+    const pageParam = parseInt(searchParams.get("page") as string);
+    const totalData = MockData.length;
+    const totalPages = Math.round(totalData / perPageParam);
+    console.log(
+      `perPage: ${perPageParam} pages: ${pageParam} totalData: ${totalData} totalPages: ${totalPages}`
+    );
 
-    return HttpResponse.json([
-      {
-        param: pageParam,
-        postId: "post01",
-        tags: [{ tagId: "tag01", item: DrinkData[1].category }],
-        image: "/sample1.jpeg",
-        brand: "Corona",
-        createdAt: new Date(),
-        weather: "맑음",
-        location: "비틀비틀",
-        people: "홍길동",
-        food: "타코",
-        title: "제목 예시",
-        contents: "컨텐츠 예시입니다",
-      },
-      {
-        param: pageParam + 1,
-        postId: "post02",
-        image: "/sample2.jpg",
-        tags: [
-          { tagId: "tag01", item: DrinkData[4].category },
-          { tagId: "tag02", item: DrinkData[4].types![1] },
-          { tagId: "tag03", item: DrinkData[4].country![0] },
-        ],
-        brand: "Wild Yeast Chardonnay",
-        vintage: 2019,
-        createdAt: new Date(),
-        weather: "비",
-        location: "와인바",
-        people: "홍길동",
-        food: "가리비관자구이",
-        title: "화이트와인",
-        contents: "컨텐츠 예시입니다",
-      },
-      {
-        param: pageParam + 2,
-        postId: "post03",
-        tags: [{ tagId: "tag01", item: DrinkData[1].category }],
-        image: "/sample3.jpg",
-        brand: "노티드 스마일 위트 에일",
-        createdAt: new Date(),
-        weather: "맑음",
-        location: "올림픽공원",
-        people: "김철수, 이영희",
-        food: "",
-        title: "제목",
-        contents: "컨텐츠 예시입니다",
-      },
-      {
-        param: pageParam + 3,
-        postId: "post04",
-        image: "/sample4.jpg",
-        tags: [{ tagId: "tag01", item: DrinkData[10].category }],
-        brand: "진토닉",
-        base: "Monkey47",
-        createdAt: new Date(),
-        weather: "흐림",
-        location: "바",
-        people: "",
-        food: "",
-        title: "titletitle",
-        contents: "contents contents contents contents",
-      },
-    ]);
+    return HttpResponse.json(
+      MockData.slice(pageParam * perPageParam, (pageParam + 1) * perPageParam)
+    );
   }),
-  http.get("/api/posts/:postId", ({ request, params }) => {
+
+  http.get("/api/posts/:postId", ({ params }) => {
     const { postId } = params;
     const postDetail = MockData.find((data) => data.postId === postId);
     if (postDetail) {

@@ -5,14 +5,15 @@ import Post from "./Post";
 import { IPost } from "@/types/Post";
 import { Fragment, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import * as commonStyles from "@/app/common.css";
 import { LoadingSpinner } from "./LoadingSpinner";
+import * as commonStyles from "../common.css";
 
-const LIMIT = 1;
+const LIMIT = 4;
 
-const fetchPosts = async ({ pageParam = 1 }: { pageParam: number }) => {
-  console.log("pageParam: ", pageParam, "perPage: ", LIMIT);
+const fetchPosts = async ({ pageParam = 0 }: { pageParam: number }) => {
+  // console.log("pageParam: ", pageParam, "perPage: ", LIMIT);
   try {
+    // debugger;
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts?per_page=${LIMIT}&page=${pageParam}`
     );
@@ -33,17 +34,21 @@ export default function PostList() {
         if (lastPage?.length === 0 || lastPage?.length < LIMIT) {
           return undefined;
         }
-        return lastPage.at(-1)?.param + 1;
+        return allPage.length;
       },
       initialPageParam: 0,
     });
+
   const { ref, inView } = useInView();
   // console.log("data : ", data);
+
   useEffect(() => {
     if (inView) {
-      !isFetching && hasNextPage && fetchNextPage();
+      // console.log(inView, "스크롤 요청");
+      // console.log("isFetching: ", isFetching, "hasNextPage : ", hasNextPage);
+      if (inView && hasNextPage) fetchNextPage();
     }
-  }, [inView, isFetching, hasNextPage, fetchNextPage]);
+  }, [inView]);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -62,7 +67,9 @@ export default function PostList() {
           ))}
         </Fragment>
       ))}
-      <div ref={ref}></div>
+      <li className={commonStyles.observer} ref={ref}>
+        {isFetching ? <LoadingSpinner /> : "😋"}
+      </li>
     </>
   );
 }

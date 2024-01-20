@@ -222,6 +222,14 @@ export const postItem = style({
   },
 });
 
+export const observer = style({
+  display: "flex",
+  justifyContent: "center",
+  padding: "12px 0",
+  width: "100%",
+  fontSize: "36px",
+});
+
 export const btnActive = style({
   backgroundColor: vars.bgColor.black,
   color: vars.color.selected,
