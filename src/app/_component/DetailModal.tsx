@@ -5,52 +5,66 @@ import { useRouter } from "next/navigation";
 import * as commonStyles from "@/app/common.css";
 import * as postStyles from "@/app/_component/post.css";
 import TagList from "./TagList";
+import { IPost } from "@/types/Post";
+import { useQuery } from "@tanstack/react-query";
 
-export default function DetailModal() {
+export default function DetailModal({ id }: { id: string }) {
+  const { data: post, error } = useQuery<IPost>({
+    queryKey: ["post", id],
+    queryFn: async ({ queryKey }) => {
+      const [_1, id] = queryKey;
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${id}`
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      return data;
+    },
+  });
   const router = useRouter();
   const onClickClose = () => {
     router.back();
   };
 
-  const example = {
-    postId: "1",
-    image: "/sample1.jpeg",
-    tags: [{ tagId: "tag01", item: "맥주" }],
-    brand: "Corona",
-    createdAt: new Date(),
-    weather: "맑음",
-    location: "비틀비틀",
-    people: "홍길동",
-    food: "타코",
-    title: "제목 예시",
-    contents: "컨텐츠 예시입니다",
-  };
-
+  if (!post) {
+    return (
+      <div className={`${commonStyles.noContentsBox} ${commonStyles.tempShow}`}>
+        <div className={commonStyles.controlWrap}>
+          <span style={{ fontSize: "36px" }}>🫥</span>
+          <p className={commonStyles.infoText}>게시글을 찾을 수 없습니다</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className={commonStyles.modalWrap}>
       <article className={postStyles.detailBox}>
         <div className={postStyles.imgBox}>
-          <Image src={example.image} alt="" fill={true} objectFit="cover" />
+          <Image src={post.image} alt="" fill={true} priority />
         </div>
         <div className={postStyles.summaryTextBox}>
           <div className={postStyles.dayInfo}>
-            <span>{/*example.createdAt*/}</span>
-            <span className={postStyles.dayWeather}>{example.weather}</span>
+            <span>{`${new Date().getFullYear()}. ${
+              new Date().getMonth() + 1
+            }. ${new Date().getDate()}`}</span>
+            <span className={postStyles.dayWeather}>{post.weather}</span>
           </div>
-          <TagList tags={example.tags} />
+          <TagList tags={post.tags} />
           <div className={postStyles.drinkInfo}>
-            <span>{example.brand}</span>
+            <span>{post.brand}</span>
           </div>
-          <p className={postStyles.contentTitle}>{example.title}</p>
+          <p className={postStyles.contentTitle}>{post.title}</p>
           <div
             className={`${commonStyles.contentScrollWrap} ${commonStyles.scrollWrap}`}
           >
-            <p className={postStyles.contentText}>{example.contents}</p>
+            <p className={postStyles.contentText}>{post.contents}</p>
           </div>
           <div className={postStyles.moreInfo}>
-            <span>{example.location}</span>
-            <span>{example.people}</span>
-            <span>{example.food}</span>
+            <span>{post.location}</span>
+            <span>{post.people}</span>
+            <span>{post.food}</span>
           </div>
         </div>
         <button

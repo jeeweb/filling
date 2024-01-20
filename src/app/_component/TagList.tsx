@@ -1,9 +1,5 @@
 import * as postStyles from "@/app/_component/post.css";
-
-type Tag = {
-  tagId: string;
-  item: string;
-};
+import { Tag } from "@/types/Post";
 
 export default function TagList({ tags }: { tags: Tag[] }) {
   return (
