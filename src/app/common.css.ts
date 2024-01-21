@@ -62,20 +62,13 @@ export const inner = style({
 export const tempShow = style({});
 
 export const noContentsBox = style({
-  display: "none", // 임시
-  // display: "flex",
+  display: "flex",
   flexDirection: "column",
   alignItems: "center",
   height: "100%",
   width: "100%",
   backgroundColor: vars.bgColor.gray,
   textAlign: "center",
-  // 임시
-  selectors: {
-    [`&.${tempShow}`]: {
-      display: "flex",
-    },
-  },
 });
 
 export const controlWrap = style({

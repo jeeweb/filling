@@ -27,17 +27,8 @@ export default async function Home() {
   });
 
   const dehydratedStae = dehydrate(queryClient);
-
   return (
     <>
-      <section className={commonStyles.noContentsBox}>
-        <div className={commonStyles.controlWrap}>
-          <p className={commonStyles.infoText}>기록을 작성해주세요!</p>
-          <Link href="/feed" className={commonStyles.btnWrite}>
-            작성하기
-          </Link>
-        </div>
-      </section>
       <section className={commonStyles.contentsBox}>
         <HydrationBoundary state={dehydratedStae}>
           <PostListWrap />

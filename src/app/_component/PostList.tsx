@@ -11,9 +11,7 @@ import * as commonStyles from "../common.css";
 const LIMIT = 4;
 
 const fetchPosts = async ({ pageParam = 0 }: { pageParam: number }) => {
-  // console.log("pageParam: ", pageParam, "perPage: ", LIMIT);
   try {
-    // debugger;
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts?per_page=${LIMIT}&page=${pageParam}`
     );
@@ -40,12 +38,9 @@ export default function PostList() {
     });
 
   const { ref, inView } = useInView();
-  // console.log("data : ", data);
 
   useEffect(() => {
     if (inView) {
-      // console.log(inView, "스크롤 요청");
-      // console.log("isFetching: ", isFetching, "hasNextPage : ", hasNextPage);
       if (inView && hasNextPage) fetchNextPage();
     }
   }, [inView]);
@@ -58,18 +53,26 @@ export default function PostList() {
     return <div>This is Error!</div>;
   }
 
-  return (
-    <>
-      {data?.pages.map((page, idx) => (
-        <Fragment key={idx}>
-          {page.map((post: IPost) => (
-            <Post key={post.postId} post={post} />
-          ))}
-        </Fragment>
-      ))}
-      <li className={commonStyles.observer} ref={ref}>
-        {isFetching ? <LoadingSpinner /> : "😋"}
+  if (data?.pages[0].length > 0) {
+    return (
+      <>
+        {data?.pages.map((page, idx) => (
+          <Fragment key={idx}>
+            {page.map((post: IPost) => (
+              <Post key={post.postId} post={post} />
+            ))}
+          </Fragment>
+        ))}
+        <li className={commonStyles.observer} ref={ref}>
+          {isFetching ? <LoadingSpinner /> : "😋"}
+        </li>
+      </>
+    );
+  } else {
+    return (
+      <li className={commonStyles.controlWrap}>
+        <p className={commonStyles.infoText}>기록을 작성해주세요!</p>
       </li>
-    </>
-  );
+    );
+  }
 }
