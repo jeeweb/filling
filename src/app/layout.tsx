@@ -4,6 +4,8 @@ import Link from "next/link";
 import "./reset.css";
 import { Noto_Sans_KR, Black_Han_Sans } from "next/font/google";
 import * as commonStyles from "./common.css";
+import { MockService } from "./_component/MockService";
+import ReactQueryProvider from "./_component/ReactQueryProvider";
 
 export const metadata: Metadata = {
   title: "필링",
@@ -36,16 +38,19 @@ export default function RootLayout({
       className={`${notoSansKr.variable} ${blackHanSans.variable}`}
     >
       <body className={commonStyles.common}>
+        <MockService />
         <header className={commonStyles.header}>
           <h1 className={commonStyles.logo}>
             <Link href="/">필링</Link>
           </h1>
           <Nav />
         </header>
-        <div className={commonStyles.container}>
-          {children}
-          {modal}
-        </div>
+        <ReactQueryProvider>
+          <div className={commonStyles.container}>
+            {children}
+            {modal}
+          </div>
+        </ReactQueryProvider>
       </body>
     </html>
   );

@@ -12,7 +12,7 @@ export function Nav() {
           </Link>
         </li>
         <li className="nav__item">
-          <Link href="/create" className="nav__link">
+          <Link href="/feed" className="nav__link">
             작성하기
           </Link>
         </li>

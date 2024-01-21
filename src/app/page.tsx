@@ -1,41 +1,38 @@
 import Link from "next/link";
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
+import PostListWrap from "./_component/PostListWrap";
 import * as commonStyles from "./common.css";
-import * as cardStyles from "@/app/_component/card.css";
-import Card from "./_component/Card";
-
-const example = {
-  postId: "123",
-  image: "/sample1.jpeg",
-  tags: [{ tagId: "tag01", item: "맥주" }],
-  brand: "Corona",
-  createdAt: new Date(),
-  weather: "맑음",
-  location: "비틀비틀",
-  people: "홍길동",
-  food: "타코",
-  title: "제목 예시",
-  contents: "컨텐츠 예시입니다",
-};
 
 export default async function Home() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ["posts"],
+    queryFn: async () => {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`
+      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      return data;
+    },
+    initialPageParam: 0,
+  });
+
+  const dehydratedStae = dehydrate(queryClient);
   return (
     <>
-      <section className={commonStyles.noContentsBox}>
-        <div className={commonStyles.controlWrap}>
-          <p className={commonStyles.infoText}>기록을 작성해주세요!</p>
-          <Link href="/feed" className={commonStyles.btnWrite}>
-            작성하기
-          </Link>
-        </div>
-      </section>
       <section className={commonStyles.contentsBox}>
-        <div
-          className={`${commonStyles.scrollWrap} ${commonStyles.cardScrollWrap}`}
-        >
-          <ul className={cardStyles.cardList}>
-            <Card post={example} />
-          </ul>
-        </div>
+        <HydrationBoundary state={dehydratedStae}>
+          <PostListWrap />
+        </HydrationBoundary>
       </section>
     </>
   );

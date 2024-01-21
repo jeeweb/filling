@@ -1,9 +1,5 @@
 import * as postStyles from "@/app/_component/post.css";
-
-type Tag = {
-  tagId: string;
-  item: string;
-};
+import { Tag } from "@/types/Post";
 
 export default function TagList({ tags }: { tags: Tag[] }) {
   return (
@@ -12,7 +8,7 @@ export default function TagList({ tags }: { tags: Tag[] }) {
         if (index === 0) {
           return (
             <span
-              key={index}
+              key={tag.tagId}
               className={`${postStyles.tagItem} ${postStyles.drinkTag}`}
             >
               {tag.item}
@@ -20,7 +16,7 @@ export default function TagList({ tags }: { tags: Tag[] }) {
           );
         }
         return (
-          <span key={index} className={postStyles.tagItem}>
+          <span key={tag.tagId} className={postStyles.tagItem}>
             {tag.item}
           </span>
         );
