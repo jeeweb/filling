@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "./theme.css";
+import { formImgRow } from "./post/postForm.css";
 
 export const common = style({
   color: vars.color.primary,
@@ -77,6 +78,7 @@ export const contentsBox = style({
 export const cardScrollWrap = style({});
 export const listScrollWrap = style({});
 export const contentScrollWrap = style({});
+export const formScrollWrap = style({});
 
 export const scrollWrap = style({
   overflow: "auto",
@@ -103,6 +105,12 @@ export const scrollWrap = style({
     },
     [`&.${contentScrollWrap}`]: {
       height: "calc(100% - 126px)",
+    },
+    [`&.${formScrollWrap}`]: {
+      flex: 1,
+      display: "flex",
+      flexDirection: "column",
+      paddingBottom: "16px",
     },
     "&::-webkit-scrollbar-thumb:hover": {
       backgroundColor: "#a9d9e3",
@@ -140,6 +148,9 @@ export const infoText = style({
       color: vars.color.primary,
       fontSize: vars.fontSize.large,
     },
+    [`${formImgRow} &`]: {
+      lineHeight: "28px",
+    },
   },
 });
 
@@ -154,7 +165,6 @@ export const btnListStyleWrap = style({
 });
 
 export const btnSmall = style({});
-export const btnSubmit = style({});
 
 export const btn = style({
   display: "inline-block",
@@ -172,10 +182,16 @@ export const btn = style({
       padding: "4px 10px",
       fontSize: vars.fontSize.small,
     },
-    [`&.${btnSubmit}`]: {
-      backgroundColor: vars.bgColor.blue,
-    },
   },
+});
+
+export const btnSubmit = style({
+  backgroundColor: vars.bgColor.blue,
+});
+
+export const btnActive = style({
+  backgroundColor: vars.bgColor.black,
+  color: vars.color.selected,
 });
 
 export const btnIcon = style({
@@ -246,6 +262,7 @@ export const textarea = style({
   borderRadius: "8px",
   backgroundColor: "transparent",
   transition: "0.3s",
+  resize: "none",
   ":focus": {
     outline: "none",
     borderColor: vars.bgColor.green,
@@ -362,11 +379,6 @@ export const observer = style({
   padding: "12px 0",
   width: "100%",
   fontSize: "36px",
-});
-
-export const btnActive = style({
-  backgroundColor: vars.bgColor.black,
-  color: vars.color.selected,
 });
 
 /** Modal **/
