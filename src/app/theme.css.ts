@@ -5,6 +5,7 @@ export const vars = createGlobalTheme(":root", {
     primary: "#2B2B2B",
     secondary: "#8A8A8A",
     selected: "#FFFFFF",
+    error: "#F77676",
   },
   bgColor: {
     yellow: "#FBE285",
@@ -15,8 +16,18 @@ export const vars = createGlobalTheme(":root", {
     black: "#252525",
     white: "#FFFFFF",
   },
-  font: {
+  fontFamily: {
     logo: `var(--font-black-han-sans)`,
     common: `var(--font-noto-sans-kr)`,
+  },
+  fontSize: {
+    small: "14px",
+    medium: "16px",
+    large: "20px",
+  },
+  fontWeight: {
+    normal: "400",
+    semiBold: "500",
+    bold: "700",
   },
 });

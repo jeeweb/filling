@@ -3,18 +3,11 @@ import { vars } from "./theme.css";
 
 export const common = style({
   color: vars.color.primary,
-  fontFamily: vars.font.common,
+  fontFamily: vars.fontFamily.common,
+  fontSize: vars.fontSize.medium,
 });
 
-export const loadingSpinner = style({
-  position: "absolute",
-  top: "40vh",
-  left: "0",
-  display: "flex",
-  justifyContent: "center",
-  width: "100vw",
-});
-
+/**** layout ****/
 export const header = style({
   position: "absolute",
   top: "0",
@@ -36,19 +29,13 @@ export const navList = style({
 });
 
 export const container = style({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   position: "relative",
   top: "60px",
   height: "calc(100vh - 60px)",
-});
-
-export const logo = style({
-  fontFamily: vars.font.logo,
-  fontWeight: "normal",
-  selectors: {
-    [`${header} &`]: {
-      fontSize: "40px",
-    },
-  },
+  backgroundColor: vars.bgColor.gray,
 });
 
 export const inner = style({
@@ -56,10 +43,8 @@ export const inner = style({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  width: "1000px",
+  padding: "0 8vw",
 });
-
-export const tempShow = style({});
 
 export const noContentsBox = style({
   display: "flex",
@@ -89,16 +74,8 @@ export const contentsBox = style({
   overflow: "hidden",
 });
 
-export const btnListStyleWrap = style({
-  position: "absolute",
-  top: "12px",
-  left: "8vw",
-  display: "flex",
-  alignItems: "center",
-  gap: "4px",
-});
-
 export const cardScrollWrap = style({});
+export const listScrollWrap = style({});
 export const contentScrollWrap = style({});
 
 export const scrollWrap = style({
@@ -116,9 +93,13 @@ export const scrollWrap = style({
   },
   selectors: {
     [`&.${cardScrollWrap}`]: {
-      padding: "0 8vw",
       marginTop: "52px",
       height: "calc(100% - 52px)",
+    },
+    [`&.${listScrollWrap}`]: {
+      marginTop: "52px",
+      height: "calc(100% - 52px)",
+      width: "100%",
     },
     [`&.${contentScrollWrap}`]: {
       height: "calc(100% - 126px)",
@@ -129,45 +110,80 @@ export const scrollWrap = style({
   },
 });
 
+/**** Elements ****/
+export const logo = style({
+  fontFamily: vars.fontFamily.logo,
+  fontWeight: "normal",
+  selectors: {
+    [`${header} &`]: {
+      fontSize: "40px",
+    },
+  },
+});
+
+export const loadingSpinner = style({
+  position: "absolute",
+  top: "40vh",
+  left: "0",
+  display: "flex",
+  justifyContent: "center",
+  width: "100vw",
+});
+
 export const infoText = style({
+  color: vars.color.secondary,
+  fontSize: vars.fontSize.small,
   selectors: {
     [`${controlWrap} &`]: {
       padding: "16px",
       marginBottom: "4px",
-      fontSize: "20px",
+      color: vars.color.primary,
+      fontSize: vars.fontSize.large,
     },
   },
 });
 
 /** Buttons **/
-export const btnListStyle = style({
+export const btnListStyleWrap = style({
+  position: "absolute",
+  top: "12px",
+  left: "8vw",
+  display: "flex",
+  alignItems: "center",
+  gap: "4px",
+});
+
+export const btnSmall = style({});
+export const btnSubmit = style({});
+
+export const btn = style({
   display: "inline-block",
-  padding: "4px 8px",
+  padding: "8px 12px",
   textAlign: "center",
-  borderRadius: "16px",
+  borderRadius: "20px",
   backgroundColor: vars.bgColor.gray,
-  fontSize: "14px",
   transition: "0.2s",
+  ":hover": {
+    backgroundColor: vars.bgColor.black,
+    color: vars.color.selected,
+  },
   selectors: {
-    "&:hover": {
-      backgroundColor: vars.bgColor.black,
-      color: vars.color.selected,
+    [`&.${btnSmall}`]: {
+      padding: "4px 10px",
+      fontSize: vars.fontSize.small,
+    },
+    [`&.${btnSubmit}`]: {
+      backgroundColor: vars.bgColor.blue,
     },
   },
 });
 
-export const btnWrite = style({
-  display: "inline-block",
-  padding: "8px 12px",
-  textAlign: "center",
-  borderRadius: "16px",
-  backgroundColor: vars.bgColor.gray,
-  transition: "0.2s",
-  selectors: {
-    "&:hover": {
-      backgroundColor: vars.bgColor.black,
-      color: vars.color.selected,
-    },
+export const btnIcon = style({
+  width: "24px",
+  height: "24px",
+  borderRadius: "50%",
+  ":hover": {
+    backgroundColor: vars.bgColor.gray,
   },
 });
 
@@ -175,9 +191,133 @@ export const btnClose = style({
   position: "absolute",
   right: "18px",
   top: "18px",
-  width: "24px",
-  height: "24px",
-  backgroundImage: "url('/btn-close.png')",
+  backgroundImage: "url('/icon-close.png')",
+});
+
+export const btnCalendar = style({
+  backgroundImage: "url('/icon-calendar.png')",
+});
+
+/** input **/
+export const inputGroup = style({
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+});
+
+export const inputBox = style({
+  display: "flex",
+  alignItems: "center",
+  //padding: "8px 0",
+  borderRadius: "20px",
+  backgroundColor: vars.bgColor.white,
+  selectors: {
+    [`${inputGroup} &`]: {
+      flex: 1,
+    },
+  },
+});
+
+export const inputText = style({
+  flex: "1",
+  padding: "8px",
+  borderBottom: `2px solid ${vars.bgColor.gray}`,
+  color: vars.color.primary,
+  fontFamily: vars.fontFamily.common,
+  transition: "0.3s",
+  ":focus": {
+    borderColor: vars.bgColor.green,
+  },
+  "::placeholder": {
+    opacity: 0.6,
+    color: vars.color.secondary,
+    fontFamily: vars.fontFamily.common,
+    fontSize: vars.fontSize.small,
+  },
+});
+
+export const textarea = style({
+  width: "100%",
+  height: "116px",
+  padding: "6px 8px",
+  color: vars.color.primary,
+  fontFamily: vars.fontFamily.common,
+  border: `2px solid ${vars.bgColor.gray}`,
+  borderRadius: "8px",
+  backgroundColor: "transparent",
+  transition: "0.3s",
+  ":focus": {
+    outline: "none",
+    borderColor: vars.bgColor.green,
+  },
+  "::placeholder": {
+    opacity: 0.6,
+    color: vars.color.secondary,
+    fontFamily: vars.fontFamily.common,
+    fontSize: vars.fontSize.small,
+  },
+});
+
+export const checkBox = style({
+  position: "relative",
+});
+
+export const inputCheck = style({
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  overflow: "hidden",
+  border: 0,
+});
+
+export const inputCheckLabel = style({
+  display: "inline-block",
+  position: "relative",
+  paddingLeft: "24px",
+  cursor: "pointer",
+  "::before": {
+    content: "",
+    position: "absolute",
+    left: 0,
+    top: 0,
+    width: "20px",
+    height: "20px",
+    background: "url('/icon-checkbox.png') center / contain no-repeat",
+  },
+  selectors: {
+    [`${inputCheck}:checked + &::before`]: {
+      backgroundImage: "url('/icon-checkbox-checked.png')",
+    },
+  },
+});
+
+export const inputCheckLabelText = style({
+  fontSize: vars.fontSize.small,
+  lineHeight: "20px",
+  selectors: {
+    [`${inputCheck}:checked + ${inputCheckLabel} &`]: {
+      fontWeight: vars.fontWeight.bold,
+    },
+  },
+});
+
+export const selectBox = style({
+  MozAppearance: "none",
+  WebkitAppearance: "none",
+  appearance: "none",
+  padding: "6px 8px",
+  width: "120px",
+  color: vars.color.primary,
+  fontFamily: vars.fontFamily.common,
+  border: `2px solid ${vars.bgColor.gray}`,
+  borderRadius: "8px",
+  transition: "0.3s",
+  background: "url('/icon-arrow-down.png') 92% center no-repeat",
+  backgroundSize: "18%",
+  ":focus": {
+    outline: "none",
+    borderColor: vars.bgColor.green,
+  },
 });
 
 /** PostList **/
@@ -199,6 +339,7 @@ export const postItem = style({
   gap: "16px",
   padding: "16px",
   borderRadius: "12px",
+  backgroundColor: vars.bgColor.white,
   boxShadow: "2px 2px 10px -2px rgba(0,0,0,0.15)",
   cursor: "pointer",
   selectors: {
@@ -231,14 +372,14 @@ export const btnActive = style({
 /** Modal **/
 export const modalWrap = style({
   position: "absolute",
-  top: "0",
+  top: "-60px",
   left: "0",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   width: "100vw",
   height: "100vh",
-  backgroundColor: "rgba(0,0,0,0.5)",
+  backgroundColor: "rgba(0,0,0,0.8)",
   zIndex: "100",
 });
 
@@ -254,5 +395,5 @@ export const modalError = style({
   textAlign: "center",
   backgroundColor: "rgba(0,0,0,0.5)",
   //color: vars.color.secondary,
-  fontSize: "20px",
+  fontSize: vars.fontSize.large,
 });

@@ -30,7 +30,7 @@ export default function DetailModal({ id }: { id: string }) {
 
   if (!post) {
     return (
-      <div className={`${commonStyles.noContentsBox} ${commonStyles.tempShow}`}>
+      <div className={`${commonStyles.noContentsBox}`}>
         <div className={commonStyles.controlWrap}>
           <span style={{ fontSize: "36px" }}>🫥</span>
           <p className={commonStyles.infoText}>게시글을 찾을 수 없습니다</p>
@@ -68,7 +68,7 @@ export default function DetailModal({ id }: { id: string }) {
           </div>
         </div>
         <button
-          className={commonStyles.btnClose}
+          className={`${commonStyles.btnIcon} ${commonStyles.btnClose}`}
           onClick={onClickClose}
         ></button>
       </article>

@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import PostList from "./PostList";
 import * as commonStyles from "../common.css";
@@ -15,11 +16,11 @@ export default function PostListWrap() {
   };
 
   return (
-    <>
+    <div className={commonStyles.inner}>
       <div className={commonStyles.btnListStyleWrap}>
         <button
           onClick={onClickCard}
-          className={cx(commonStyles.btnListStyle, {
+          className={cx(commonStyles.btn, commonStyles.btnSmall, {
             [commonStyles.btnActive]: listStyle === "card",
           })}
         >
@@ -27,7 +28,7 @@ export default function PostListWrap() {
         </button>
         <button
           onClick={onClickBoard}
-          className={cx(commonStyles.btnListStyle, {
+          className={cx(commonStyles.btn, commonStyles.btnSmall, {
             [commonStyles.btnActive]: listStyle === "board",
           })}
         >
@@ -35,7 +36,15 @@ export default function PostListWrap() {
         </button>
       </div>
       <div
-        className={`${commonStyles.scrollWrap} ${commonStyles.cardScrollWrap}`}
+        className={cx(
+          commonStyles.scrollWrap,
+          {
+            [commonStyles.cardScrollWrap]: listStyle === "card",
+          },
+          {
+            [commonStyles.listScrollWrap]: listStyle === "board",
+          }
+        )}
       >
         <ul
           className={cx(
@@ -50,6 +59,6 @@ export default function PostListWrap() {
           <PostList />
         </ul>
       </div>
-    </>
+    </div>
   );
 }
