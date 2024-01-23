@@ -1,18 +1,182 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, FormEventHandler, useState, ChangeEventHandler } from "react";
+import {
+  useState,
+  useRef,
+  Fragment,
+  FormEventHandler,
+  ChangeEventHandler,
+  useEffect,
+} from "react";
 import * as formStyles from "./postForm.css";
 import * as commonStyles from "@/app/common.css";
+import { useQuery } from "@tanstack/react-query";
+import { IDrink } from "@/types/Drink";
+
+const selectList1 = [
+  { value: "default", name: "주종" },
+  { value: "d01", name: "소주" },
+  { value: "d02", name: "맥주" },
+];
 
 export default function PostForm() {
   const imageRef = useRef<HTMLInputElement>(null);
   const [imgPreview, setImgPreview] = useState("");
+  const [drink, setDrink] = useState("주종");
+  const [drinkTypeList, setDrinkTypeList] = useState<string[]>([]);
+  const [countryList, setCountryList] = useState<string[]>([]);
+  const [drinkType, setDrinkType] = useState("종류");
+  const [country, setCountry] = useState("생산지");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const submitForm: FormEventHandler = (event) => {
-    event.preventDefault();
+  const { data: drinks, error } = useQuery<IDrink[]>({
+    queryKey: ["drink"],
+    queryFn: async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/post`
+        );
+        return response.json();
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    },
+  });
+
+  const handleDrinkSelect: ChangeEventHandler<HTMLSelectElement> = (event) => {
+    setDrink(event.target.value);
+  };
+
+  const handleDrinkTypeSelect: ChangeEventHandler<HTMLSelectElement> = (
+    event
+  ) => {
+    setDrinkType(event.target.value);
+  };
+
+  useEffect(() => {
+    if (drink === "d05" || drink === "d06") {
+      setDrinkTypeList(
+        drinks?.find((item: IDrink) => item.drinkId === drink)
+          ?.types as string[]
+      );
+      setCountryList(
+        drinks?.find((item: IDrink) => item.drinkId === drink)
+          ?.country as string[]
+      );
+    }
+  }, [drink, drinks]);
+
+  const controlSelect = () => {};
+  const showMoreInput = () => {
+    switch (drink) {
+      case "d02":
+      case "d07":
+      case "d08":
+        return (
+          <>
+            <div className={commonStyles.inputBox}>
+              <input
+                type="text"
+                className={commonStyles.inputText}
+                placeholder="생산지"
+              ></input>
+            </div>
+          </>
+        );
+      case "d03":
+        return (
+          <>
+            <div className={commonStyles.inputBox}>
+              <input
+                type="text"
+                className={commonStyles.inputText}
+                placeholder="생산지"
+              ></input>
+            </div>
+            <div className={commonStyles.inputBox}>
+              <input
+                type="text"
+                className={commonStyles.inputText}
+                placeholder="양조장"
+              ></input>
+            </div>
+          </>
+        );
+      case "d05":
+      case "d06":
+        return (
+          <>
+            <div className={commonStyles.inputBox}>
+              <input
+                type="text"
+                className={commonStyles.inputText}
+                placeholder="빈티지/숙성연도"
+              ></input>
+            </div>
+          </>
+        );
+      case "d09":
+      case "d10":
+        return (
+          <>
+            <div className={commonStyles.inputBox}>
+              <input
+                type="text"
+                className={commonStyles.inputText}
+                placeholder="종류/등급"
+              ></input>
+            </div>
+            <div className={commonStyles.inputBox}>
+              <input
+                type="text"
+                className={commonStyles.inputText}
+                placeholder="생산지"
+              ></input>
+            </div>
+          </>
+        );
+      case "d11":
+        return (
+          <>
+            <div className={commonStyles.inputBox}>
+              <input
+                type="text"
+                className={commonStyles.inputText}
+                placeholder="베이스"
+              ></input>
+            </div>
+            <div className={commonStyles.inputBox}>
+              <input
+                type="text"
+                className={commonStyles.inputText}
+                placeholder="사용재료"
+              ></input>
+            </div>
+          </>
+        );
+      case "d12":
+        return (
+          <>
+            <div className={commonStyles.inputBox}>
+              <input
+                type="text"
+                className={commonStyles.inputText}
+                placeholder="주종"
+              ></input>
+            </div>
+            <div className={commonStyles.inputBox}>
+              <input
+                type="text"
+                className={commonStyles.inputText}
+                placeholder="생산지"
+              ></input>
+            </div>
+          </>
+        );
+    }
   };
 
   const loadImgPreview: ChangeEventHandler<HTMLInputElement> = () => {
@@ -24,6 +188,10 @@ export default function PostForm() {
         setImgPreview(reader.result as string);
       };
     }
+  };
+
+  const submitForm: FormEventHandler = (event) => {
+    event.preventDefault();
   };
 
   const uploadImg = () => {
@@ -70,23 +238,52 @@ export default function PostForm() {
                 name="drink"
                 id="selectDrink"
                 className={commonStyles.selectBox}
+                onChange={handleDrinkSelect}
+                value={drink}
               >
-                <option>주종</option>
+                {drinks?.map((drink) => {
+                  return (
+                    <option value={drink.drinkId} key={drink.drinkId}>
+                      {drink.category}
+                    </option>
+                  );
+                })}
               </select>
-              <select
-                name="type"
-                id="selecType"
-                className={commonStyles.selectBox}
-              >
-                <option>종류</option>
-              </select>
-              <select
-                name="country"
-                id="selectCountry"
-                className={commonStyles.selectBox}
-              >
-                <option>생산지</option>
-              </select>
+              {drink === "d05" || drink === "d06" ? (
+                <>
+                  <select
+                    name="type"
+                    id="selecType"
+                    className={commonStyles.selectBox}
+                    onChange={handleDrinkTypeSelect}
+                    value={drinkType}
+                  >
+                    {drinkTypeList?.map((type, idx) => {
+                      return (
+                        <option value={type} key={idx}>
+                          {type}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <select
+                    name="country"
+                    id="selectCountry"
+                    className={commonStyles.selectBox}
+                    value={country}
+                  >
+                    {countryList?.map((country, idx) => {
+                      return (
+                        <option value={country} key={idx}>
+                          {country}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </>
+              ) : (
+                ""
+              )}
               <div className={commonStyles.inputBox}>
                 <input
                   type="text"
@@ -94,20 +291,7 @@ export default function PostForm() {
                   placeholder="브랜드명/상품명"
                 ></input>
               </div>
-              <div className={commonStyles.inputBox}>
-                <input
-                  type="text"
-                  className={commonStyles.inputText}
-                  placeholder="등급"
-                ></input>
-              </div>
-              <div className={commonStyles.inputBox}>
-                <input
-                  type="text"
-                  className={commonStyles.inputText}
-                  placeholder="생산지"
-                ></input>
-              </div>
+              {showMoreInput()}
             </div>
             <div className={`${commonStyles.inputBox} ${formStyles.formRow}`}>
               <input

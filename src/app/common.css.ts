@@ -45,6 +45,7 @@ export const inner = style({
   alignItems: "center",
   justifyContent: "center",
   padding: "0 8vw",
+  width: "100%",
 });
 
 export const noContentsBox = style({

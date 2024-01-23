@@ -4,6 +4,7 @@ import { vars } from "@/app/theme.css";
 export const formBox = style({
   margin: "8vh 0",
   padding: "16px",
+  width: "100%",
   height: "calc(100vh - 60px - 16vh)",
   borderRadius: "12px",
   backgroundColor: vars.bgColor.white,
