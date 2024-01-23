@@ -93,14 +93,14 @@ const DrinkData = [
   {
     drinkId: "d12",
     category: "기타",
-    // 주종(drink), 이름(brand), 생산지(country) 직접 입력
+    // 주종(base), 이름(brand), 생산지(country) 직접 입력
   },
 ];
 
 const MockData = [
   {
     postId: "post01",
-    tags: [{ tagId: "tag01", item: DrinkData[2].category }],
+    drink: DrinkData[2].category,
     image: "/sample1.jpeg",
     brand: "Corona",
     createdAt: new Date(),
@@ -114,11 +114,9 @@ const MockData = [
   {
     postId: "post02",
     image: "/sample1.jpeg",
-    tags: [
-      { tagId: "tag01", item: DrinkData[5].category },
-      { tagId: "tag02", item: DrinkData[5].types![1] },
-      { tagId: "tag03", item: DrinkData[5].country![0] },
-    ],
+    drink: DrinkData[5].category,
+    type: DrinkData[5].types![1],
+    country: DrinkData[5].country![0],
     brand: "Wild Yeast Chardonnay",
     vintage: 2019,
     createdAt: new Date(),
@@ -131,7 +129,7 @@ const MockData = [
   },
   {
     postId: "post03",
-    tags: [{ tagId: "tag01", item: DrinkData[2].category }],
+    drink: DrinkData[2].category,
     image: "/sample1.jpeg",
     brand: "노티드 스마일 위트 에일",
     createdAt: new Date(),
@@ -145,7 +143,7 @@ const MockData = [
   {
     postId: "post04",
     image: "/sample1.jpeg",
-    tags: [{ tagId: "tag01", item: DrinkData[11].category }],
+    drink: DrinkData[11].category,
     brand: "진토닉",
     base: "Monkey47",
     createdAt: new Date(),
@@ -158,7 +156,7 @@ const MockData = [
   },
   {
     postId: "post05",
-    tags: [{ tagId: "tag01", item: DrinkData[2].category }],
+    drink: DrinkData[2].category,
     image: "/sample2.jpg",
     brand: "Corona",
     createdAt: new Date(),
@@ -172,11 +170,9 @@ const MockData = [
   {
     postId: "post06",
     image: "/sample2.jpg",
-    tags: [
-      { tagId: "tag01", item: DrinkData[5].category },
-      { tagId: "tag02", item: DrinkData[5].types![1] },
-      { tagId: "tag03", item: DrinkData[5].country![0] },
-    ],
+    drink: DrinkData[5].category,
+    type: DrinkData[5].types![1],
+    country: DrinkData[5].country![0],
     brand: "Wild Yeast Chardonnay",
     vintage: 2019,
     createdAt: new Date(),
@@ -189,7 +185,7 @@ const MockData = [
   },
   {
     postId: "post07",
-    tags: [{ tagId: "tag01", item: DrinkData[2].category }],
+    drink: DrinkData[2].category,
     image: "/sample2.jpg",
     brand: "노티드 스마일 위트 에일",
     createdAt: new Date(),
@@ -203,7 +199,7 @@ const MockData = [
   {
     postId: "post08",
     image: "/sample2.jpg",
-    tags: [{ tagId: "tag01", item: DrinkData[11].category }],
+    drink: DrinkData[11].category,
     brand: "진토닉",
     base: "Monkey47",
     createdAt: new Date(),
@@ -216,7 +212,6 @@ const MockData = [
   },
   {
     postId: "post09",
-    tags: [{ tagId: "tag01", item: DrinkData[2].category }],
     image: "/sample3.jpg",
     brand: "Corona",
     createdAt: new Date(),
@@ -230,11 +225,9 @@ const MockData = [
   {
     postId: "post10",
     image: "/sample3.jpg",
-    tags: [
-      { tagId: "tag01", item: DrinkData[5].category },
-      { tagId: "tag02", item: DrinkData[5].types![1] },
-      { tagId: "tag03", item: DrinkData[5].country![0] },
-    ],
+    drink: DrinkData[5].category,
+    type: DrinkData[5].types![1],
+    country: DrinkData[5].country![0],
     brand: "Wild Yeast Chardonnay",
     vintage: 2019,
     createdAt: new Date(),
@@ -247,7 +240,7 @@ const MockData = [
   },
   {
     postId: "post11",
-    tags: [{ tagId: "tag01", item: DrinkData[2].category }],
+    drink: DrinkData[2].category,
     image: "/sample3.jpg",
     brand: "노티드 스마일 위트 에일",
     createdAt: new Date(),
@@ -261,7 +254,7 @@ const MockData = [
   {
     postId: "post12",
     image: "/sample3.jpg",
-    tags: [{ tagId: "tag01", item: DrinkData[11].category }],
+    drink: DrinkData[11].category,
     brand: "진토닉",
     base: "Monkey47",
     createdAt: new Date(),

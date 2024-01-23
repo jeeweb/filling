@@ -2,11 +2,10 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
 import * as commonStyles from "@/app/common.css";
 import * as postStyles from "@/app/_component/post.css";
-import TagList from "./TagList";
 import { IPost } from "@/types/Post";
-import { useQuery } from "@tanstack/react-query";
 
 export default function DetailModal({ id }: { id: string }) {
   const { data: post, error } = useQuery<IPost>({
@@ -51,7 +50,21 @@ export default function DetailModal({ id }: { id: string }) {
             }. ${new Date().getDate()}`}</span>
             <span className={postStyles.dayWeather}>{post.weather}</span>
           </div>
-          <TagList tags={post.tags} />
+          <div className={postStyles.tagList}>
+            <span className={`${postStyles.tagItem} ${postStyles.drinkTag}`}>
+              {post.drink}
+            </span>
+            {post.type ? (
+              <span className={postStyles.tagItem}>{post.type}</span>
+            ) : (
+              ""
+            )}
+            {post.country ? (
+              <span className={postStyles.tagItem}>{post.country}</span>
+            ) : (
+              ""
+            )}
+          </div>
           <div className={postStyles.drinkInfo}>
             <span>{post.brand}</span>
           </div>
