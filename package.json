@@ -12,10 +12,12 @@
   "dependencies": {
     "@tanstack/react-query": "^5.17.9",
     "@types/classnames": "^2.3.1",
+    "@types/react-datepicker": "^4.19.5",
     "@vanilla-extract/css": "^1.14.0",
     "classnames": "^2.5.1",
     "next": "14.0.4",
     "react": "^18",
+    "react-datepicker": "^4.25.0",
     "react-dom": "^18",
     "react-intersection-observer": "^9.5.3"
   },

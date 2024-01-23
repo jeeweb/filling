@@ -4,21 +4,16 @@ import Image from "next/image";
 import {
   useState,
   useRef,
-  Fragment,
   FormEventHandler,
   ChangeEventHandler,
   useEffect,
 } from "react";
+import { useQuery } from "@tanstack/react-query";
+import DatePicker from "react-datepicker";
 import * as formStyles from "./postForm.css";
 import * as commonStyles from "@/app/common.css";
-import { useQuery } from "@tanstack/react-query";
+import "react-datepicker/dist/react-datepicker.css";
 import { IDrink } from "@/types/Drink";
-
-const selectList1 = [
-  { value: "default", name: "주종" },
-  { value: "d01", name: "소주" },
-  { value: "d02", name: "맥주" },
-];
 
 export default function PostForm() {
   const imageRef = useRef<HTMLInputElement>(null);
@@ -30,6 +25,7 @@ export default function PostForm() {
   const [country, setCountry] = useState("생산지");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
   const { data: drinks, error } = useQuery<IDrink[]>({
     queryKey: ["drink"],
@@ -55,6 +51,11 @@ export default function PostForm() {
   ) => {
     setDrinkType(event.target.value);
   };
+  const handleCountrySelect: ChangeEventHandler<HTMLSelectElement> = (
+    event
+  ) => {
+    setCountry(event.target.value);
+  };
 
   useEffect(() => {
     if (drink === "d05" || drink === "d06") {
@@ -69,7 +70,6 @@ export default function PostForm() {
     }
   }, [drink, drinks]);
 
-  const controlSelect = () => {};
   const showMoreInput = () => {
     switch (drink) {
       case "d02":
@@ -270,6 +270,7 @@ export default function PostForm() {
                     name="country"
                     id="selectCountry"
                     className={commonStyles.selectBox}
+                    onChange={handleCountrySelect}
                     value={country}
                   >
                     {countryList?.map((country, idx) => {
@@ -355,17 +356,12 @@ export default function PostForm() {
               <div
                 className={`${commonStyles.inputBox} ${formStyles.formItem}`}
               >
-                <button
-                  className={`${commonStyles.btnIcon} ${commonStyles.btnCalendar}`}
-                  type="button"
-                  onClick={openMap}
-                ></button>
-                <input
-                  type="text"
-                  className={commonStyles.inputText}
-                  placeholder="YYYY.MM.DD"
-                  readOnly
-                ></input>
+                <DatePicker
+                  dateFormat="yyyy.MM.dd"
+                  selected={selectedDate}
+                  onChange={(date: Date) => setSelectedDate(date)}
+                  className={commonStyles.datepicker}
+                />
               </div>
               <div
                 className={`${commonStyles.inputBox} ${formStyles.formItem}`}
