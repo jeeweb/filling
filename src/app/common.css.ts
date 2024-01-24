@@ -44,8 +44,16 @@ export const inner = style({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  padding: "0 8vw",
-  width: "100%",
+  margin: "0 calc(8vw - 8px)",
+  //width: "100%",
+});
+
+export const contentsBox = style({
+  position: "relative",
+  height: "100%",
+  width: "100vw",
+  overflow: "hidden",
+  backgroundColor: vars.bgColor.white,
 });
 
 export const noContentsBox = style({
@@ -69,13 +77,6 @@ export const controlWrap = style({
   },
 });
 
-export const contentsBox = style({
-  position: "relative",
-  height: "100%",
-  width: "100vw",
-  overflow: "hidden",
-});
-
 export const cardScrollWrap = style({});
 export const listScrollWrap = style({});
 export const contentScrollWrap = style({});
@@ -83,6 +84,7 @@ export const formScrollWrap = style({});
 
 export const scrollWrap = style({
   overflow: "auto",
+  padding: "8px",
   "::-webkit-scrollbar": {
     width: "6px",
     height: "6px",
@@ -97,15 +99,15 @@ export const scrollWrap = style({
   selectors: {
     [`&.${cardScrollWrap}`]: {
       marginTop: "52px",
-      height: "calc(100% - 52px)",
+      height: "calc(100vh - 104px)",
     },
     [`&.${listScrollWrap}`]: {
       marginTop: "52px",
-      height: "calc(100% - 52px)",
+      height: "calc(100vh - 104px)",
       width: "100%",
     },
     [`&.${contentScrollWrap}`]: {
-      height: "calc(100% - 126px)",
+      height: "calc(100vh - 126px)",
     },
     [`&.${formScrollWrap}`]: {
       flex: 1,
