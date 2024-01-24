@@ -1,3 +1,4 @@
+import { IPost } from "@/types/Post";
 import { http, HttpResponse } from "msw";
 
 const DrinkData = [
@@ -294,5 +295,18 @@ export const handlers = [
 
   http.get("/api/post", () => {
     return HttpResponse.json(DrinkData);
+  }),
+
+  http.post("/api/new", async ({ request }) => {
+    const newData = await request.json();
+    if (MockData.length > 0) {
+      newData!.postId = `post${
+        parseInt(MockData[MockData.length - 1].postId.slice(4)) + 1
+      }`;
+    } else {
+      newData!.postId = "post01";
+    }
+    MockData.push(newData);
+    return HttpResponse.json(Array.from(MockData.values()), { status: 201 });
   }),
 ];
