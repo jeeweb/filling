@@ -3,6 +3,7 @@ import { MouseEventHandler } from "react";
 
 export interface IButton {
   value: string;
+  className?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
