@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
 import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import ImagePreview from "./_component/ImagePreview";
@@ -12,8 +11,6 @@ import DrinkInfoSelectBox from "../_component/elements/DrinkInfoSelectBox";
 import CheckBox from "../_component/elements/CheckBox";
 import SmallButton from "../_component/elements/SmallButton";
 import SubmitButton from "../_component/elements/SubmitButton";
-import { getDrinkList } from "../_lib/getDrinkList";
-import { IDrink } from "@/types/Drink";
 import { IPost } from "@/types/Post";
 import * as formStyles from "./postForm.css";
 import * as commonStyles from "@/app/common.css";
@@ -25,43 +22,43 @@ export default function PostForm() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const router = useRouter();
 
-  const { data: drinkList, error } = useQuery<IDrink[]>({
-    queryKey: ["drink"],
-    queryFn: getDrinkList,
-  });
-
-  const showMoreInput = (drink: string) => {
-    switch (drink) {
-      case "d02":
-      case "d07":
-      case "d08":
+  const InputMoreDrinkDetails = (selectedDrink: string) => {
+    console.log(selectedDrink);
+    switch (selectedDrink) {
+      case "Soju":
+      case "Vodka":
+      case "Tequila":
         return (
           <InputText placeholder="생산지" register={register("country")} />
         );
-      case "d03":
+      case "Beer":
+      case "KoreanTraditionalLiquor":
         return (
           <>
             <InputText placeholder="생산지" register={register("country")} />
             <InputText placeholder="양조장" register={register("brewery")} />
           </>
         );
-      case "d05":
-      case "d06":
+      case "Wine":
+      case "Whiskey":
         return (
           <InputText
             placeholder="빈티지/숙성연도"
             register={register("vintage")}
           />
         );
-      case "d09":
-      case "d10":
+      case "Rum":
+      case "Brandy":
         return (
           <>
-            <InputText placeholder="종류/등급" register={register("type")} />
+            <InputText
+              placeholder="종류/등급"
+              register={register("drinkType")}
+            />
             <InputText placeholder="생산지" register={register("country")} />
           </>
         );
-      case "d11":
+      case "Cocktail":
         return (
           <>
             <InputText placeholder="베이스" register={register("base")} />
@@ -71,10 +68,10 @@ export default function PostForm() {
             />
           </>
         );
-      case "d12":
+      case "Etc":
         return (
           <>
-            <InputText placeholder="주종" register={register("drink")} />
+            <InputText placeholder="주종" register={register("base")} />
             <InputText placeholder="생산지" register={register("country")} />
           </>
         );
@@ -117,19 +114,16 @@ export default function PostForm() {
                 className={`${commonStyles.inputGroup} ${formStyles.formRow}`}
               >
                 <DrinkSelectBox
-                  dataList={drinkList!}
                   register={register("drink", { required: true })}
                 />
-                {watch("drink") === "d05" || watch("drink") === "d06" ? (
+                {watch("drink") === "Wine" || watch("drink") === "Whiskey" ? (
                   <>
                     <DrinkInfoSelectBox
-                      dataList={drinkList!}
-                      register={register("type")}
+                      register={register("drinkType")}
                       watch={watch("drink")}
-                      dataKey={"types"}
+                      dataKey={"drinkTypes"}
                     />
                     <DrinkInfoSelectBox
-                      dataList={drinkList!}
                       register={register("country")}
                       watch={watch("drink")}
                       dataKey={"country"}
@@ -142,7 +136,7 @@ export default function PostForm() {
                     required: "필수 항목 입니다.",
                   })}
                 />
-                {watch("drink") ? showMoreInput(watch("drink")) : null}
+                {watch("drink") ? InputMoreDrinkDetails(watch("drink")) : null}
               </div>
               <InputText
                 divClassName={formStyles.formRow}

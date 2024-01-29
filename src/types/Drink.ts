@@ -1,6 +1,6 @@
 export interface IDrink {
-  drinkId: string;
-  category: string;
-  types?: string[];
-  country?: string[];
+  category: "Wine" | "Whiskey";
+  name: string;
+  drinkTypes: string[];
+  country: string[];
 }

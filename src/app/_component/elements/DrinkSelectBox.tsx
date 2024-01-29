@@ -1,17 +1,32 @@
+import { useQuery } from "@tanstack/react-query";
+import { UseFormRegisterReturn } from "react-hook-form";
+import { getDrinkList } from "@/app/_lib/getDrinkList";
 import * as commonStyles from "@/app/common.css";
-import { IDrinkSelectBox } from "@/types/Elements";
 
-export default function DrinkSelectBox(props: IDrinkSelectBox) {
-  const { register, dataList } = props;
-  return (
-    <select className={commonStyles.selectBox} {...register}>
-      {dataList?.map((drink) => {
-        return (
-          <option value={drink.drinkId} key={drink.drinkId}>
-            {drink.category}
-          </option>
-        );
-      })}
-    </select>
-  );
+type Props = {
+  register: UseFormRegisterReturn;
+};
+
+export default function DrinkSelectBox(props: Props) {
+  const { register } = props;
+  const { data: drinkList, error } = useQuery({
+    queryKey: ["drink"],
+    queryFn: getDrinkList,
+  });
+  if (drinkList) {
+    const keyArray = Object.keys(drinkList);
+    return (
+      <>
+        <select className={commonStyles.selectBox} {...register}>
+          {keyArray?.map((key) => {
+            return (
+              <option value={key} key={key}>
+                {drinkList[key]}
+              </option>
+            );
+          })}
+        </select>
+      </>
+    );
+  }
 }

@@ -1,15 +1,37 @@
+import { useQuery } from "@tanstack/react-query";
+import { UseFormRegisterReturn } from "react-hook-form";
 import * as commonStyles from "@/app/common.css";
 import { IDrink } from "@/types/Drink";
-import { IDrinkSelectBox } from "@/types/Elements";
 
-export default function DrinkInfoSelectBox(props: IDrinkSelectBox) {
-  const { dataList, register, watch, dataKey } = props;
-  if (dataKey === "types") {
+type Props = {
+  register: UseFormRegisterReturn;
+  watch: string;
+  dataKey: string;
+};
+
+export default function DrinkInfoSelectBox(props: Props) {
+  const { register, watch, dataKey } = props;
+  const { data: drinkDetail, error } = useQuery({
+    queryKey: ["drinkDetail"],
+    queryFn: async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/drink-details`
+        );
+        return response.json();
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    },
+  });
+
+  if (dataKey === "drinkTypes") {
     return (
       <select className={commonStyles.selectBox} {...register}>
-        {dataList
-          ?.find((item: IDrink) => item.drinkId === watch)
-          ?.types?.map((type, index) => {
+        {drinkDetail
+          ?.find((item: IDrink) => item.category === watch)
+          ?.drinkTypes?.map((type: string, index: number) => {
             console.log(type);
             return (
               <option value={type} key={index}>
@@ -23,11 +45,11 @@ export default function DrinkInfoSelectBox(props: IDrinkSelectBox) {
   if (dataKey === "country") {
     return (
       <select className={commonStyles.selectBox} {...register}>
-        {dataList
-          ?.find((item: IDrink) => item.drinkId === watch)
-          ?.country?.map((country, idx) => {
+        {drinkDetail
+          ?.find((item: IDrink) => item.category === watch)
+          ?.country?.map((country: string, index: number) => {
             return (
-              <option value={country} key={idx}>
+              <option value={country} key={index}>
                 {country}
               </option>
             );

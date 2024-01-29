@@ -4,8 +4,9 @@ export interface IPost {
   image: string;
   brand: string;
   country?: string;
+  city?: string;
   brewery?: string;
-  type?: string;
+  drinkType?: string;
   vintage?: Date;
   base?: string;
   ingredients?: string;
