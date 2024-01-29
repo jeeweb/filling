@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, useRef, ChangeEventHandler } from "react";
 import SmallButton from "@/app/_component/elements/SmallButton";
 import * as formStyles from "@/app/post/postForm.css";
+import { IconNoImage } from "@/app/_component/icons/IconNoImage";
 
 export default function ImagePreview() {
   const [imgPreview, setImgPreview] = useState("");
@@ -35,7 +36,9 @@ export default function ImagePreview() {
       <div className={formStyles.imgBox}>
         {imgPreview ? (
           <Image src={imgPreview} alt="" fill={true} priority />
-        ) : null}
+        ) : (
+          <IconNoImage />
+        )}
       </div>
       <div>
         <SmallButton value={"사진첨부"} onClick={uploadImg} />

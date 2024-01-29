@@ -201,8 +201,8 @@ export const btnActive = style({
 });
 
 export const btnIcon = style({
-  width: "24px", // 1.5rem
-  height: "24px", //1.5rem
+  width: "1.5rem",
+  height: "1.5rem",
   borderRadius: "50%",
   ":hover": {
     backgroundColor: vars.bgColor.gray,
@@ -213,7 +213,6 @@ export const btnClose = style({
   position: "absolute",
   right: "1.125rem",
   top: "1.125rem",
-  backgroundImage: "url('/icon-close.png')",
 });
 
 export const btnCalendar = style({
@@ -325,6 +324,17 @@ export const inputCheckLabelText = style({
 });
 
 export const selectBox = style({
+  position: "relative",
+  border: `2px solid ${vars.bgColor.gray}`,
+  borderRadius: "0.5rem",
+  transition: "0.3s",
+  overflow: "hidden",
+  ":focus-within": {
+    borderColor: vars.bgColor.green,
+  },
+});
+
+export const select = style({
   MozAppearance: "none",
   WebkitAppearance: "none",
   appearance: "none",
@@ -332,14 +342,24 @@ export const selectBox = style({
   width: "7.5rem",
   color: vars.color.primary,
   fontFamily: vars.fontFamily.common,
-  border: `2px solid ${vars.bgColor.gray}`,
-  borderRadius: "0.5rem",
-  transition: "0.3s",
-  background: "url('/icon-arrow-down.png') 92% center no-repeat",
-  backgroundSize: "18%",
+  border: 0,
   ":focus": {
     outline: "none",
-    borderColor: vars.bgColor.green,
+  },
+});
+
+export const iconArrowDown = style({
+  selectors: {
+    [`${selectBox} &`]: {
+      position: "absolute",
+      top: "50%",
+      right: "0.5rem",
+      transform: "translateY(-50%)",
+      transition: "0.3s",
+    },
+    // [`${selectBox} ${select}:active &`]: {
+    //   transform: "rotate(180deg) translateY(50%)",
+    // },
   },
 });
 

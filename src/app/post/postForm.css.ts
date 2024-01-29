@@ -47,10 +47,12 @@ export const formItem = style({
 
 export const imgBox = style({
   position: "relative",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
   overflow: "hidden",
   width: "32vh",
   height: "100%",
   minHeight: "11.25rem",
-  background: "url('/icon-noimage.png') center no-repeat",
   backgroundColor: vars.bgColor.gray,
 });

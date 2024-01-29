@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import * as commonStyles from "@/app/common.css";
 import * as postStyles from "@/app/_component/post.css";
 import { IPost } from "@/types/Post";
+import { IconClose } from "./icons/IconClose";
 
 export default function DetailModal({ id }: { id: string }) {
   const { data: post, error } = useQuery<IPost>({
@@ -83,7 +84,9 @@ export default function DetailModal({ id }: { id: string }) {
         <button
           className={`${commonStyles.btnIcon} ${commonStyles.btnClose}`}
           onClick={onClickClose}
-        ></button>
+        >
+          <IconClose />
+        </button>
       </article>
     </div>
   );
