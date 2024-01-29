@@ -52,18 +52,18 @@ export default function DetailModal({ id }: { id: string }) {
           </div>
           <div className={postStyles.tagList}>
             <span className={`${postStyles.tagItem} ${postStyles.drinkTag}`}>
-              {post.drink}
+              {post.drink === "기타" ? post.base : post.drink}
             </span>
-            {post.type ? (
-              <span className={postStyles.tagItem}>{post.type}</span>
-            ) : (
-              ""
-            )}
-            {post.country ? (
-              <span className={postStyles.tagItem}>{post.country}</span>
-            ) : (
-              ""
-            )}
+            {post.drinkType || post.drink === "칵테일" ? (
+              <span className={postStyles.tagItem}>
+                {post.drinkType || post.base}
+              </span>
+            ) : null}
+            {post.country || post.city ? (
+              <span className={postStyles.tagItem}>
+                {post.country || post.city}
+              </span>
+            ) : null}
           </div>
           <div className={postStyles.drinkInfo}>
             <span>{post.brand}</span>
