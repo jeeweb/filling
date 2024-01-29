@@ -1,6 +1,5 @@
 import Image from "next/image";
 import * as postStyles from "@/app/_component/post.css";
-import TagList from "@/app/_component/TagList";
 import PostItem from "./PostItem";
 import { IPost } from "@/types/Post";
 
@@ -11,7 +10,21 @@ export default function Post({ post }: { post: IPost }) {
         <Image src={post.image} alt="" fill={true} priority />
       </div>
       <div className={postStyles.summaryTextBox}>
-        <TagList tags={post.tags} />
+        <div className={postStyles.tagList}>
+          <span className={`${postStyles.tagItem} ${postStyles.drinkTag}`}>
+            {post.drink === "기타" ? post.base : post.drink}
+          </span>
+          {post.drinkType || post.drink === "칵테일" ? (
+            <span className={postStyles.tagItem}>
+              {post.drinkType || post.base}
+            </span>
+          ) : null}
+          {post.country || post.city ? (
+            <span className={postStyles.tagItem}>
+              {post.country || post.city}
+            </span>
+          ) : null}
+        </div>
         <div className={postStyles.drinkInfo}>
           <span>{post.brand}</span>
         </div>

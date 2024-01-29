@@ -5,7 +5,7 @@ import Post from "./Post";
 import { IPost } from "@/types/Post";
 import { Fragment, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { LoadingSpinner } from "./LoadingSpinner";
+import { LoadingSpinner } from "./elements/LoadingSpinner";
 import * as commonStyles from "../common.css";
 
 const LIMIT = 4;
