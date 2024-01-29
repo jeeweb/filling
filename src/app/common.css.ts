@@ -18,15 +18,16 @@ export const header = style({
   justifyContent: "space-between",
   padding: "0 8vw",
   width: "100vw",
-  height: "60px",
+  height: "4rem",
   backgroundColor: "#fff",
   boxShadow: "-2px 0px 8px 0px rgba(0,0,0,0.15)",
+  zIndex: "100",
 });
 
 export const navList = style({
   display: "flex",
   alignItems: "center",
-  gap: "12px",
+  gap: "0.875em",
 });
 
 export const container = style({
@@ -34,8 +35,8 @@ export const container = style({
   flexDirection: "column",
   alignItems: "center",
   position: "relative",
-  top: "60px",
-  height: "calc(100vh - 60px)",
+  top: "4rem",
+  height: "calc(100vh - 4rem)",
   backgroundColor: vars.bgColor.gray,
 });
 
@@ -44,7 +45,7 @@ export const inner = style({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  margin: "0 calc(8vw - 8px)",
+  margin: "0 calc(8vw - 0.5em)",
   //width: "100%",
 });
 
@@ -67,8 +68,8 @@ export const noContentsBox = style({
 });
 
 export const controlWrap = style({
-  padding: "8px",
-  borderRadius: "24px",
+  padding: "0.5em",
+  borderRadius: "1.5em",
   backgroundColor: vars.bgColor.white,
   selectors: {
     [`${noContentsBox} &`]: {
@@ -84,10 +85,10 @@ export const formScrollWrap = style({});
 
 export const scrollWrap = style({
   overflow: "auto",
-  padding: "8px",
+  padding: "0.5em",
   "::-webkit-scrollbar": {
-    width: "6px",
-    height: "6px",
+    width: "8px",
+    height: "8px",
   },
   "::-webkit-scrollbar-track": {
     backgroundColor: vars.bgColor.white,
@@ -98,22 +99,22 @@ export const scrollWrap = style({
   },
   selectors: {
     [`&.${cardScrollWrap}`]: {
-      marginTop: "52px",
-      height: "calc(100vh - 104px)",
+      marginTop: "3.25em",
+      height: "calc(100vh - 6.5em)",
     },
     [`&.${listScrollWrap}`]: {
-      marginTop: "52px",
-      height: "calc(100vh - 104px)",
+      marginTop: "3.25em",
+      height: "calc(100vh - 6.5em)",
       width: "100%",
     },
     [`&.${contentScrollWrap}`]: {
-      height: "calc(100vh - 126px)",
+      height: "calc(100vh - 7.875rem)",
     },
     [`&.${formScrollWrap}`]: {
       flex: 1,
       display: "flex",
       flexDirection: "column",
-      paddingBottom: "16px",
+      paddingBottom: "1rem",
     },
     "&::-webkit-scrollbar-thumb:hover": {
       backgroundColor: "#a9d9e3",
@@ -127,7 +128,7 @@ export const logo = style({
   fontWeight: "normal",
   selectors: {
     [`${header} &`]: {
-      fontSize: "40px",
+      fontSize: "2.5em",
     },
   },
 });
@@ -146,13 +147,13 @@ export const infoText = style({
   fontSize: vars.fontSize.small,
   selectors: {
     [`${controlWrap} &`]: {
-      padding: "16px",
-      marginBottom: "4px",
+      padding: "1em",
+      marginBottom: "0.25em",
       color: vars.color.primary,
       fontSize: vars.fontSize.large,
     },
     [`${formImgRow} &`]: {
-      lineHeight: "28px",
+      lineHeight: "1.75em",
     },
   },
 });
@@ -160,20 +161,20 @@ export const infoText = style({
 /** Buttons **/
 export const btnListStyleWrap = style({
   position: "absolute",
-  top: "12px",
+  top: "1rem",
   left: "8vw",
   display: "flex",
   alignItems: "center",
-  gap: "4px",
+  gap: "0.25em",
 });
 
 export const btnSmall = style({});
 
 export const btn = style({
   display: "inline-block",
-  padding: "8px 12px",
+  padding: "0.5em 0.75em",
   textAlign: "center",
-  borderRadius: "20px",
+  borderRadius: "1.25em",
   backgroundColor: vars.bgColor.gray,
   transition: "0.2s",
   ":hover": {
@@ -182,7 +183,7 @@ export const btn = style({
   },
   selectors: {
     [`&.${btnSmall}`]: {
-      padding: "4px 10px",
+      padding: "0.25em 0.625em",
       fontSize: vars.fontSize.small,
     },
   },
@@ -198,8 +199,8 @@ export const btnActive = style({
 });
 
 export const btnIcon = style({
-  width: "24px",
-  height: "24px",
+  width: "24px", // 1.5rem
+  height: "24px", //1.5rem
   borderRadius: "50%",
   ":hover": {
     backgroundColor: vars.bgColor.gray,
@@ -208,8 +209,8 @@ export const btnIcon = style({
 
 export const btnClose = style({
   position: "absolute",
-  right: "18px",
-  top: "18px",
+  right: "1.125rem",
+  top: "1.125rem",
   backgroundImage: "url('/icon-close.png')",
 });
 
@@ -221,14 +222,14 @@ export const btnCalendar = style({
 export const inputGroup = style({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "0.5em",
 });
 
 export const inputBox = style({
   display: "flex",
   alignItems: "center",
   //padding: "8px 0",
-  borderRadius: "20px",
+  borderRadius: "1.25rem",
   backgroundColor: vars.bgColor.white,
   selectors: {
     [`${inputGroup} &`]: {
@@ -239,7 +240,7 @@ export const inputBox = style({
 
 export const inputText = style({
   flex: "1",
-  padding: "8px",
+  padding: "0.5rem",
   borderBottom: `2px solid ${vars.bgColor.gray}`,
   color: vars.color.primary,
   fontFamily: vars.fontFamily.common,
@@ -257,12 +258,12 @@ export const inputText = style({
 
 export const textarea = style({
   width: "100%",
-  height: "116px",
-  padding: "6px 8px",
+  height: "7.25em",
+  padding: "0.375em 0.5em",
   color: vars.color.primary,
   fontFamily: vars.fontFamily.common,
   border: `2px solid ${vars.bgColor.gray}`,
-  borderRadius: "8px",
+  borderRadius: "0.5em",
   backgroundColor: "transparent",
   transition: "0.3s",
   resize: "none",
@@ -293,15 +294,15 @@ export const inputCheck = style({
 export const inputCheckLabel = style({
   display: "inline-block",
   position: "relative",
-  paddingLeft: "24px",
+  paddingLeft: "1.5rem",
   cursor: "pointer",
   "::before": {
     content: "",
     position: "absolute",
     left: 0,
     top: 0,
-    width: "20px",
-    height: "20px",
+    width: "20px", //1.25rem
+    height: "20px", //1.25rem
     background: "url('/icon-checkbox.png') center / contain no-repeat",
   },
   selectors: {
@@ -313,7 +314,7 @@ export const inputCheckLabel = style({
 
 export const inputCheckLabelText = style({
   fontSize: vars.fontSize.small,
-  lineHeight: "20px",
+  lineHeight: "1.25",
   selectors: {
     [`${inputCheck}:checked + ${inputCheckLabel} &`]: {
       fontWeight: vars.fontWeight.bold,
@@ -325,12 +326,12 @@ export const selectBox = style({
   MozAppearance: "none",
   WebkitAppearance: "none",
   appearance: "none",
-  padding: "6px 8px",
-  width: "120px",
+  padding: "0.375rem 0.5rem",
+  width: "7.5rem",
   color: vars.color.primary,
   fontFamily: vars.fontFamily.common,
   border: `2px solid ${vars.bgColor.gray}`,
-  borderRadius: "8px",
+  borderRadius: "0.5rem",
   transition: "0.3s",
   background: "url('/icon-arrow-down.png') 92% center no-repeat",
   backgroundSize: "18%",
@@ -343,35 +344,35 @@ export const selectBox = style({
 /** PostList **/
 export const cardList = style({
   display: "flex",
-  gap: "8px",
+  gap: "0.5rem",
   flexWrap: "wrap", // 가로스크롤구현 전 임시로 적용
 });
 
 export const boardList = style({
   display: "flex",
-  gap: "8px",
+  gap: "0.5rem",
   flexDirection: "column",
 });
 
 export const postItem = style({
   flexShrink: 0,
   display: "flex",
-  gap: "16px",
-  padding: "16px",
-  borderRadius: "12px",
+  gap: "0.75rem",
+  padding: "1rem",
+  borderRadius: "0.75rem",
   backgroundColor: vars.bgColor.white,
   boxShadow: "2px 2px 10px -2px rgba(0,0,0,0.15)",
   cursor: "pointer",
   selectors: {
     [`${cardList} &`]: {
       flexDirection: "column",
-      width: "400px",
+      width: "25rem",
       height: "64vh",
       minHeight: "464px",
     },
     [`${boardList} &`]: {
       width: "100%",
-      height: "124px",
+      height: "7.75rem",
     },
   },
 });
@@ -387,7 +388,7 @@ export const observer = style({
 /** Modal **/
 export const modalWrap = style({
   position: "absolute",
-  top: "-60px",
+  top: "-4rem",
   left: "0",
   display: "flex",
   alignItems: "center",
@@ -395,17 +396,17 @@ export const modalWrap = style({
   width: "100vw",
   height: "100vh",
   backgroundColor: "rgba(0,0,0,0.8)",
-  zIndex: "100",
+  zIndex: "200",
 });
 
 export const modalError = style({
   position: "absolute",
-  top: "60px",
+  top: "4rem",
   left: "0",
   display: "flex",
   justifyContent: "center",
   width: "100vw",
-  height: "calc(100% - 60px)",
+  height: "calc(100% - 4rem)",
   paddingTop: "10%",
   textAlign: "center",
   backgroundColor: "rgba(0,0,0,0.5)",

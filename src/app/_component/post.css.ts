@@ -27,7 +27,7 @@ export const summaryTextBox = style({
       justifyContent: "space-between",
     },
     [`${detailBox} &`]: {
-      padding: "24px",
+      padding: "1.5rem",
       width: "360px",
     },
   },
@@ -38,15 +38,15 @@ export const imgBox = style({
   overflow: "hidden",
   selectors: {
     [`${cardList} &`]: {
-      height: "80%",
+      height: "78%",
     },
     [`${boardList} &`]: {
-      width: "92px",
+      width: "5.75rem",
       height: "100%",
     },
     [`${detailBox} &`]: {
       flex: 1,
-      borderRadius: "8px 0 0 8px",
+      borderRadius: "0.5rem 0 0 0.5rem",
     },
   },
 });
@@ -54,16 +54,16 @@ export const imgBox = style({
 export const tagList = style({
   display: "flex",
   alignItems: "center",
-  gap: "4px",
+  gap: "0.25rem",
   width: "100%",
   overflow: "hidden",
 });
 
 export const tagItem = style({
-  padding: "4px 12px",
-  fontSize: "12px",
+  padding: "0.3em 0.8em",
+  fontSize: vars.fontSize.small,
   backgroundColor: vars.bgColor.yellow,
-  borderRadius: "10px",
+  borderRadius: "1em",
 });
 
 export const drinkTag = style({
@@ -72,10 +72,10 @@ export const drinkTag = style({
 
 export const drinkInfo = style({
   display: "flex",
-  gap: "4px",
-  fontSize: "12px",
+  gap: "0.25rem",
+  fontSize: vars.fontSize.small,
   [`${detailBox} &`]: {
-    fontSize: "16px",
+    fontSize: vars.fontSize.medium,
   },
 });
 
@@ -83,21 +83,23 @@ export const contentTitle = style({
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
+  fontSize: vars.fontSize.large,
+  fontWeight: vars.fontWeight.semiBold,
 });
 
 export const contentText = style({
-  fontSize: "15px",
+  fontSize: vars.fontSize.medium,
   lineHeight: "1.26",
 });
 
 export const dayInfo = style({
   selectors: {
     [`${postItem} &`]: {
-      fontSize: "12px",
+      fontSize: vars.fontSize.small,
     },
     [`${detailBox} &`]: {
-      marginBottom: "8px",
-      fontSize: "14px",
+      marginBottom: "0.5rem",
+      fontSize: vars.fontSize.medium,
     },
   },
 });

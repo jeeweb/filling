@@ -21,9 +21,9 @@ export const vars = createGlobalTheme(":root", {
     common: `var(--font-noto-sans-kr)`,
   },
   fontSize: {
-    small: "14px",
-    medium: "16px",
-    large: "20px",
+    small: "0.875rem",
+    medium: "1rem",
+    large: "1.25rem",
   },
   fontWeight: {
     normal: "400",
