@@ -74,8 +74,11 @@ export const drinkInfo = style({
   display: "flex",
   gap: "0.25rem",
   fontSize: vars.fontSize.small,
-  [`${detailBox} &`]: {
-    fontSize: vars.fontSize.medium,
+  selectors: {
+    [`${detailBox} &`]: {
+      fontSize: vars.fontSize.medium,
+      margin: "0.8rem 0",
+    },
   },
 });
 

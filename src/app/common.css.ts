@@ -108,7 +108,9 @@ export const scrollWrap = style({
       width: "100%",
     },
     [`&.${contentScrollWrap}`]: {
-      height: "calc(100vh - 7.875rem)",
+      height: "calc(100% - 9rem)",
+      margin: "0.5em 0",
+      padding: "0.5em 0",
     },
     [`&.${formScrollWrap}`]: {
       flex: 1,
