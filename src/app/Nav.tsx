@@ -7,7 +7,7 @@ export function Nav() {
     <nav className="nav">
       <ul className={styles.navList}>
         <li className="nav__item">
-          <Link href="/lists" className="nav__link">
+          <Link href="/" className="nav__link">
             내 기록
           </Link>
         </li>
@@ -17,7 +17,7 @@ export function Nav() {
           </Link>
         </li>
         <li className="nav__item">
-          <Link href="/users" className="nav__link">
+          <Link href="/user" className="nav__link">
             내 정보
           </Link>
         </li>
