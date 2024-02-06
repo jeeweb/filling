@@ -1,5 +1,7 @@
 import * as commonStyles from "@/app/common.css";
 import * as userInfoStyles from "./userInfo.css";
+import DrinkChart from "./_component/DrinkChart";
+import StatisticsItem from "./_component/StatisticsItem";
 
 const getLastMonth = () => {
   const today = new Date();
@@ -24,7 +26,16 @@ export default async function MyPage() {
               </span>
               를 마셨어요!
             </p>
-            <div className={userInfoStyles.chartBox}>chart</div>
+          </div>
+          <div className={userInfoStyles.dashboardBox}>
+            <div className={userInfoStyles.statisticsList}>
+              <StatisticsItem title="총 작성 수" key="total" />
+              <StatisticsItem title="지난 달" key="lastMonth" />
+              <StatisticsItem title="이번 달" key="thisMonth" />
+            </div>
+            <div className={userInfoStyles.chartBox}>
+              <DrinkChart />
+            </div>
           </div>
         </div>
       </div>
